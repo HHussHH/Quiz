@@ -1,0 +1,38 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  span {
+    font-weight: 700;
+    font-size: 50px;
+    color: #fff;
+  }
+}
+
+.menu {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 275px;
+  ul {
+    display: flex;
+    gap: 50px;
+    li {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  }
+}
+
+.profile {
+  display: flex;
+  gap: 40px;
+  text-align: center;
+  align-items: center;
+  svg {
+    cursor: pointer;
+  }
+}

@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  cursor: pointer;
   span {
     font-weight: 700;
     font-size: 50px;
@@ -13,8 +14,8 @@
   padding-top: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 275px;
+  justify-content: space-between;
+
   ul {
     display: flex;
     gap: 50px;

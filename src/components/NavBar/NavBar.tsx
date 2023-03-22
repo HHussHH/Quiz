@@ -4,7 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { ReactComponent as LogoIcon } from "../../img/logo.svg";
 const NavBar = () => {
   return (
-    <header className={styles.nav}>
+    <div className={styles.nav}>
       <div className="container">
         <nav className={styles.menu}>
           <div className={styles.logo}>
@@ -17,12 +17,12 @@ const NavBar = () => {
             <li>Маркет</li>
           </ul>
           <div className={styles.profile}>
-            <ImSearch color="white" size={30} />
-            <CgProfile color="white" size={50} />
+            <ImSearch color="white" size={24} />
+            <CgProfile color="white" size={28} />
           </div>
         </nav>
       </div>
-    </header>
+    </div>
   );
 };
 

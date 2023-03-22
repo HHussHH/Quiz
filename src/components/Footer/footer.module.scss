@@ -30,9 +30,14 @@
   justify-content: center;
   gap: 40px;
   margin-bottom: 20px;
+
+  svg {
+    cursor: pointer;
+  }
 }
 
 .link {
+  cursor: pointer;
   color: #000000d3;
   font-size: 18px;
   font-weight: 700;

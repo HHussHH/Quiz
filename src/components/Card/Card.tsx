@@ -1,14 +1,16 @@
-import { useState } from "react";
 import styles from "./card.module.scss";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { setAnswer } from "../../features/selectAnswer/answer-slice";
 
+type btn = {
+  [key: string]: string;
+};
 const Card = () => {
-  type btn = {
-    [key: string]: string;
-  };
-  const [active, setActive] = useState<string>("");
+  const dispatch = useAppDispatch();
+  const answer = useAppSelector((state) => state.currentAnswer);
 
   const handleClick = (id: string) => {
-    setActive(id);
+    dispatch(setAnswer(id));
   };
 
   const buttons: btn[] = [
@@ -42,7 +44,7 @@ const Card = () => {
           {buttons.map(({ text, id }, key) => (
             <button
               className={`${styles.variant} ${
-                active === id ? styles.active : ""
+                answer === id ? styles.active : ""
               }`}
               onClick={() => handleClick(id)}
               key={key}

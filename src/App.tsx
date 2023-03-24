@@ -1,15 +1,13 @@
-import React from "react";
-
-import Header from "./components/Header/Header";
-import Rules from "./components/Rules/Rules";
-import Footer from "./components/Footer/Footer";
-
+import GamePage from "./pages/GamePage";
+import HomePage from "./pages/HomePage";
+import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Rules />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/game" element={<GamePage />} />
+      </Routes>
     </div>
   );
 }

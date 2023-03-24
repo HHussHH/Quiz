@@ -9,6 +9,12 @@ const initialState: quest[] = [
     text: "string",
     category: "математика",
     difficutly: "easy",
+    answers: {
+      answer_1: "text1",
+      answer_2: "text2",
+      answer_3: "text3",
+    },
+    currentAnswer: "answer_1",
   },
   {
     id: 1,
@@ -16,6 +22,12 @@ const initialState: quest[] = [
     text: "string",
     category: "фильмы",
     difficutly: "hard",
+    answers: {
+      answer_1: "text1",
+      answer_2: "text2",
+      answer_3: "text3",
+    },
+    currentAnswer: "answer_1",
   },
 ];
 

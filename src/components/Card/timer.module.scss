@@ -1,0 +1,28 @@
+.timer {
+  padding-top: 100px;
+  padding-bottom: 44px;
+  width: max-content;
+  margin: 0 auto;
+}
+.time {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  width: 500px;
+  align-items: center;
+  justify-content: center;
+}
+.timeline {
+  width: 500px;
+  background-color: rgb(0, 255, 221);
+  height: 6px;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 10%;
+    height: 6px;
+    background-color: red;
+  }
+}

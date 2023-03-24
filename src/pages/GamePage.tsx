@@ -1,8 +1,11 @@
 import Card from "../components/Card/Card";
+import Timer from "../components/Card/Timer";
+import styles from "./gamepage.module.scss";
 
 const GamePage = () => {
   return (
-    <div>
+    <div className={styles.field}>
+      <Timer />
       <Card />
     </div>
   );

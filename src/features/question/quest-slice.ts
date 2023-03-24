@@ -5,28 +5,46 @@ import { RootState } from "../../store";
 const initialState: quest[] = [
   {
     id: 0,
-    title: "string",
+    title: "Вопрос1",
     text: "string",
     category: "математика",
-    difficutly: "easy",
-    answers: {
-      answer_1: "text1",
-      answer_2: "text2",
-      answer_3: "text3",
-    },
+    difficutly: "hard",
+    answers: [
+      {
+        id: "answer_1",
+        text: "text1",
+      },
+      {
+        id: "answer_2",
+        text: "text2",
+      },
+      {
+        id: "answer_3",
+        text: "text3",
+      },
+    ],
     currentAnswer: "answer_1",
   },
   {
     id: 1,
-    title: "string",
+    title: "Вопрос2",
     text: "string",
     category: "фильмы",
     difficutly: "hard",
-    answers: {
-      answer_1: "text1",
-      answer_2: "text2",
-      answer_3: "text3",
-    },
+    answers: [
+      {
+        id: "answer_1",
+        text: "text1",
+      },
+      {
+        id: "answer_2",
+        text: "text2",
+      },
+      {
+        id: "answer_3",
+        text: "text3",
+      },
+    ],
     currentAnswer: "answer_2",
   },
 ];

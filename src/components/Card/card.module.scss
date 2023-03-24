@@ -2,12 +2,12 @@
   display: flex;
   margin: 0px auto;
   width: 500px;
-  height: 500px;
+  min-height: 500px;
 }
 
 .bg {
   width: 500px;
-  height: 500px;
+  min-height: 500px;
   border-radius: 30px;
   width: 100%;
   height: 100%;
@@ -16,24 +16,29 @@
 }
 
 .title {
-  margin-top: 30px;
+  font-weight: 400;
+  font-family: "Russo One", sans-serif;
+  letter-spacing: 2px;
+  margin-top: 35px;
   text-align: center;
-  color: #ffd8c1;
+  color: #000000db;
 }
 
 .text {
+  font-family: "Ubuntu Condensed", sans-serif;
   margin-top: 20px;
   padding: 0px 25px;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 400;
+  color: #000000;
 }
 .difficult {
   margin-top: 10px;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 24px;
   text-align: center;
   color: #fff;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   span {
     color: rgb(0, 255, 0);
   }
@@ -47,17 +52,38 @@
   align-items: center;
 }
 .variant {
-  width: 300px;
+  input {
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 20px;
+  min-width: 250px;
+  justify-content: center;
+  max-width: 400px;
   height: 50px;
+  border-radius: 20px;
+  font-size: 22px;
+  background-color: inherit;
+  border: 3px solid #ffffff;
 }
-
+.customSelector {
+  overflow: hidden;
+  width: 25px;
+  height: 25px;
+  border-radius: 50px;
+}
 .optionalBtn {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 10px 20px;
 }
 
 .btn {
+  cursor: pointer;
   width: 30px;
   height: 30px;
   border: none;
@@ -65,4 +91,8 @@
   &:last-child {
     background-color: red;
   }
+}
+
+.active {
+  border-color: #000;
 }

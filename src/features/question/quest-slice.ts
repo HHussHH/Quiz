@@ -27,7 +27,7 @@ const initialState: quest[] = [
       answer_2: "text2",
       answer_3: "text3",
     },
-    currentAnswer: "answer_1",
+    currentAnswer: "answer_2",
   },
 ];
 

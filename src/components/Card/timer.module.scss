@@ -13,16 +13,16 @@
   align-items: center;
   justify-content: center;
 }
-.timeline {
+.timelineRed {
   width: 500px;
-  background-color: rgb(0, 255, 221);
+  background-color: red;
   height: 6px;
+}
 
-  &::after {
-    content: "";
-    display: block;
-    width: 10%;
-    height: 6px;
-    background-color: red;
-  }
+.timeline {
+  max-width: 500px;
+  width: 10%;
+  height: 6px;
+  background-color: rgb(0, 255, 221);
+  transition: all 0.2s linear;
 }

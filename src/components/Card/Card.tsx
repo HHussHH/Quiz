@@ -3,25 +3,25 @@ import styles from "./card.module.scss";
 
 const Card = () => {
   type btn = {
-    [key: string]: string | number;
+    [key: string]: string;
   };
-  const [active, setActive] = useState<number | string>();
+  const [active, setActive] = useState<string>("");
 
-  const handleClick = (id: number | string) => {
+  const handleClick = (id: string) => {
     setActive(id);
   };
 
   const buttons: btn[] = [
     {
-      id: 1,
+      id: "answer_1",
       text: "Текст номер 1",
     },
     {
-      id: 2,
+      id: "answer_2",
       text: "Текст номер 2",
     },
     {
-      id: 3,
+      id: "answer_3",
       text: "Текст номер 3",
     },
   ];

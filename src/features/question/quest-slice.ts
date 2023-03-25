@@ -76,8 +76,8 @@ const initialState: quest[] = [
     currentAnswer: "answer_2",
   },
   {
-    timeForQuest: 151,
-    currentTime: 150,
+    timeForQuest: 10,
+    currentTime: 10,
     id: 4231,
     title: "Вопрос4",
     text: "string",

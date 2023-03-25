@@ -33,6 +33,19 @@ const Card = ({
     setQuestIdNumber(quests[0].id);
   }, []);
 
+  useEffect(() => {
+    if (quest?.currentTime === 0) {
+      if (quests.length > questPosition) {
+        setQuestPosition((q) => q + 1);
+        setQuestIdNumber(quests[questPosition].id);
+        dispatch(setAnswer(""));
+      }
+      if (quests.length === questPosition) {
+        dispatch(setFinish(true));
+      }
+    }
+  }, [quest?.currentTime]);
+
   //Вносим в одно состояние id следующего вопроса,во второе состояение номер в массиве.
   const nextQuest = () => {
     if (quests.length > questPosition) {

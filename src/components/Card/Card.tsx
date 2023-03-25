@@ -7,6 +7,7 @@ import {
 } from "../../features/selectAnswer/answer-slice";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { selectQuest } from "../../features/question/quest-slice";
+import { setFinish } from "../../features/endGame/finishSlice";
 
 type CardProps = {
   setCurrentQuestId: Dispatch<SetStateAction<number>>;
@@ -37,9 +38,15 @@ const Card = ({
     if (quests.length > questPosition) {
       setQuestPosition((q) => q + 1);
       setQuestIdNumber(quests[questPosition].id);
+      dispatch(setAnswer(""));
     }
+
     if (quest?.currentAnswer === answer) {
       dispatch(setCurrentAnswer());
+    }
+
+    if (quests.length === questPosition) {
+      dispatch(setFinish(true));
     }
   };
   //обработка выбраного ответа

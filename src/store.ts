@@ -3,11 +3,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { questReducer } from "./features/question/quest-slice";
 
 import { answerReducer } from "./features/selectAnswer/answer-slice";
+import { finishReducer } from "./features/endGame/finishSlice";
 
 export const store = configureStore({
   reducer: {
     quests: questReducer,
     currentAnswer: answerReducer,
+    finish: finishReducer,
   },
 });
 

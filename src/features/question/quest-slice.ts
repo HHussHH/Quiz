@@ -55,7 +55,7 @@ const initialState: quest[] = [
     timeForQuest: 42,
     currentTime: 42,
     id: 41,
-    title: "Вопрос2",
+    title: "Вопрос3",
     text: "string",
     category: "фильмы",
     difficutly: "hard",
@@ -75,12 +75,11 @@ const initialState: quest[] = [
     ],
     currentAnswer: "answer_2",
   },
-
   {
     timeForQuest: 151,
     currentTime: 150,
     id: 4231,
-    title: "Вопрос2",
+    title: "Вопрос4",
     text: "string",
     category: "фильмы",
     difficutly: "hard",

@@ -1,4 +1,6 @@
+import Intro from "../Intro/Intro";
 import NavBar from "../NavBar/NavBar";
+import Panel from "../Panel/Panel";
 import styles from "./header.module.scss";
 
 const Header = () => {
@@ -11,19 +13,4 @@ const Header = () => {
   );
 };
 
-const Intro = () => {
-  return (
-    <header className={styles.intro}>
-      <h1 className={styles.title}>Начни играть прямо сейчас!</h1>
-      <p className={styles.text}>
-        Регистрируйся и <span>играй</span> совершенно бесплатно!
-      </p>
-      <p className={styles.text}>
-        Интеллектуальная игру "Quiz" покажи всем свой уровень знаний!
-      </p>
-      <button className={styles.btn}>Старт</button>
-    </header>
-  );
-};
-const Panel = () => <div className={styles.panel} />;
 export default Header;

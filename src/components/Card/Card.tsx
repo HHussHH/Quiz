@@ -3,23 +3,30 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import {
   selectAnswer,
   setAnswer,
+  setCurrentAnswer,
 } from "../../features/selectAnswer/answer-slice";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { selectQuest } from "../../features/question/quest-slice";
 
 type CardProps = {
   setCurrentQuestId: Dispatch<SetStateAction<number>>;
+  setQuestPosition: Dispatch<SetStateAction<number>>;
+  questPosition: number;
 };
 
-const Card = ({ setCurrentQuestId }: CardProps) => {
+const Card = ({
+  setCurrentQuestId,
+  setQuestPosition,
+  questPosition,
+}: CardProps) => {
   const dispatch = useAppDispatch();
-
   const answer = useAppSelector(selectAnswer);
   const quests = useAppSelector(selectQuest);
 
   const [questIdNumber, setQuestIdNumber] = useState<number>(0);
-  const [questPosition, setQuestPosition] = useState<number>(1);
 
+  //поиск нужного вопроса
+  const quest = quests.find((el) => el.id === questIdNumber);
   //Задаем базовый вопрос(первый)
   useEffect(() => {
     setQuestIdNumber(quests[0].id);
@@ -27,22 +34,18 @@ const Card = ({ setCurrentQuestId }: CardProps) => {
 
   //Вносим в одно состояние id следующего вопроса,во второе состояение номер в массиве.
   const nextQuest = () => {
-    setQuestPosition((q) => q + 1);
-    setQuestIdNumber(quests[questPosition].id);
+    if (quests.length > questPosition) {
+      setQuestPosition((q) => q + 1);
+      setQuestIdNumber(quests[questPosition].id);
+    }
+    if (quest?.currentAnswer === answer) {
+      dispatch(setCurrentAnswer());
+    }
   };
-  //Реверс верхней функции
-  const prevQuest = () => {
-    setQuestPosition((q) => q - 1);
-    setQuestIdNumber(quests[questPosition].id);
-  };
-
   //обработка выбраного ответа
   const handleClick = (id: string) => {
     dispatch(setAnswer(id));
   };
-
-  //поиск нужного вопроса
-  const quest = quests.find((el) => el.id === questIdNumber);
 
   //обновление данных для текущего вопроса
   useEffect(() => {
@@ -73,8 +76,9 @@ const Card = ({ setCurrentQuestId }: CardProps) => {
           ))}
         </div>
         <div className={styles.optionalBtn}>
-          <button className={styles.btn} onClick={() => nextQuest()}></button>
-          <button className={styles.btn} onClick={() => prevQuest()}></button>
+          <button className={styles.btn} onClick={() => nextQuest()}>
+            Ответить
+          </button>
         </div>
       </div>
     </div>

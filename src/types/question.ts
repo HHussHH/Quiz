@@ -10,6 +10,8 @@ type Answers = [
 type current = string;
 
 export type quest = {
+  timeForQuest: number;
+  currentTime: number;
   id: number;
   title: string;
   text: string;

@@ -1,58 +1,66 @@
 import styles from "./card.module.scss";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { setAnswer } from "../../features/selectAnswer/answer-slice";
-import { useState } from "react";
+import {
+  selectAnswer,
+  setAnswer,
+} from "../../features/selectAnswer/answer-slice";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { selectQuest } from "../../features/question/quest-slice";
 
-type btn = {
-  [key: string]: string;
+type CardProps = {
+  setCurrentQuestId: Dispatch<SetStateAction<number>>;
 };
 
-const Card = () => {
-  const [questNumber, setQuestNumber] = useState<number>(0);
+const Card = ({ setCurrentQuestId }: CardProps) => {
   const dispatch = useAppDispatch();
-  const answer = useAppSelector((state) => state.currentAnswer);
-  const quests = useAppSelector((state) => state.quests);
 
+  const answer = useAppSelector(selectAnswer);
+  const quests = useAppSelector(selectQuest);
+
+  const [questIdNumber, setQuestIdNumber] = useState<number>(0);
+  const [questPosition, setQuestPosition] = useState<number>(1);
+
+  //Задаем базовый вопрос(первый)
+  useEffect(() => {
+    setQuestIdNumber(quests[0].id);
+  }, []);
+
+  //Вносим в одно состояние id следующего вопроса,во второе состояение номер в массиве.
+  const nextQuest = () => {
+    setQuestPosition((q) => q + 1);
+    setQuestIdNumber(quests[questPosition].id);
+  };
+  //Реверс верхней функции
+  const prevQuest = () => {
+    setQuestPosition((q) => q - 1);
+    setQuestIdNumber(quests[questPosition].id);
+  };
+
+  //обработка выбраного ответа
   const handleClick = (id: string) => {
     dispatch(setAnswer(id));
   };
 
-  const nextQuest = () => {
-    setQuestNumber((quest) => quest + 1);
-  };
+  //поиск нужного вопроса
+  const quest = quests.find((el) => el.id === questIdNumber);
 
-  const prevQuest = () => {
-    setQuestNumber((quest) => quest - 1);
-    if (questNumber === 0) {
-      setQuestNumber(0);
+  //обновление данных для текущего вопроса
+  useEffect(() => {
+    if (quest) {
+      setCurrentQuestId(quest.id);
     }
-  };
-
-  const buttons: btn[] = [
-    {
-      id: "answer_1",
-      text: "Текст номер 1",
-    },
-    {
-      id: "answer_2",
-      text: "Текст номер 2",
-    },
-    {
-      id: "answer_3",
-      text: "Текст номер 3",
-    },
-  ];
+  }, [quest]);
 
   return (
     <div className={styles.card}>
       <div className={styles.bg}>
-        <h1 className={styles.title}>{quests[questNumber].title}</h1>
-        <p className={styles.text}>{quests[questNumber].text}</p>
+        <h1 className={styles.title}>{quest?.title}</h1>
+        <p className={styles.text}>{quest?.text}</p>
         <div className={styles.difficult}>
-          Difficulty: <span>{quests[questNumber].difficutly}</span>
+          Difficulty: <span>{quest?.difficutly}</span>
         </div>
         <div className={styles.variants}>
-          {quests[questNumber].answers.map(({ text, id }, key) => (
+          {quest?.answers.map(({ text, id }, key) => (
             <button
               className={`${styles.variant} ${
                 answer === id ? styles.active : ""

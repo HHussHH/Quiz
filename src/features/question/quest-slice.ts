@@ -5,7 +5,7 @@ import { RootState } from "../../store";
 const initialState: quest[] = [
   {
     timeForQuest: 30,
-    currentTime: 30,
+    currentTime: 3000,
     id: 10,
     title: "Тот самый вопрос",
     text: "string",

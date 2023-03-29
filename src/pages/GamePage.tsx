@@ -1,6 +1,7 @@
 import Card from "../components/Card/Card";
-import QuestCounter from "../components/Card/QuestCounter";
-import Timer from "../components/Card/Timer";
+import QuestCounter from "../components/QuestCounter/QuestCounter";
+import Timer from "../components/Timer/Timer";
+import CardPanel from "../components/CardPanel/CardPanel";
 import { selectFinish } from "../features/endGame/finishSlice";
 import { useAppSelector } from "../store";
 import styles from "./gamepage.module.scss";
@@ -12,17 +13,19 @@ const GamePage = () => {
   const { isFinish } = useAppSelector(selectFinish);
   return (
     <div className={styles.field}>
-      {isFinish ? "" : <Timer currentQuestId={currentQuestId} />}
       {isFinish ? (
-        ""
+        <QuestCounter />
       ) : (
-        <Card
-          setCurrentQuestId={setCurrentQuestId}
-          setQuestPosition={setQuestPosition}
-          questPosition={questPosition}
-        />
+        <>
+          <Timer currentQuestId={currentQuestId} />
+          <Card
+            setCurrentQuestId={setCurrentQuestId}
+            setQuestPosition={setQuestPosition}
+            questPosition={questPosition}
+          />
+          <CardPanel questPosition={questPosition} />
+        </>
       )}
-      <QuestCounter questPosition={questPosition} />
     </div>
   );
 };

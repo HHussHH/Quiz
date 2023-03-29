@@ -1,0 +1,64 @@
+.panelBG {
+  z-index: 1;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.panel {
+  z-index: 2;
+  position: fixed;
+  min-height: 900px;
+  height: max-content;
+  width: 1000px;
+  overflow: hidden;
+  background-color: rgba(119, 221, 232, 0.97);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50px;
+}
+
+.panelTitle {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 40px;
+  font-size: 40px;
+  color: #fff;
+}
+
+.options {
+  display: flex;
+
+  justify-content: space-around;
+}
+
+.select {
+  width: 250px;
+  border: 2px solid #f5a002;
+  padding: 5px;
+  font-size: 18px;
+  border-radius: 20px;
+  background: none;
+}
+
+.title {
+  margin-bottom: 30px;
+}
+.btn {
+  display: block;
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  padding: 10px 100px;
+  border: none;
+  border-radius: 10px;
+  font-size: 24px;
+  transform: translate(-50%, -95%);
+}
+
+.close {
+  text-align: end;
+  padding-right: 25px;
+  cursor: pointer;
+}

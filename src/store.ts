@@ -5,6 +5,7 @@ import { questReducer } from "./features/question/quest-slice";
 import { answerReducer } from "./features/selectAnswer/answer-slice";
 import { finishReducer } from "./features/endGame/finishSlice";
 import { modalWindowReducer } from "./features/modalWindow/modalWindow-slice";
+import { gameSettingReducer } from "./features/gameSettings/setting-slice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     currentAnswer: answerReducer,
     finish: finishReducer,
     modalWindow: modalWindowReducer,
+    gameSettings: gameSettingReducer,
   },
 });
 

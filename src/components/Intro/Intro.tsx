@@ -9,7 +9,9 @@ const Intro = () => {
     <header className={styles.intro}>
       <h1 className={styles.title}>Начни играть прямо сейчас!</h1>
       <p className={styles.text}>
-        Регистрируйся и <span>играй</span> совершенно бесплатно!
+        Регистрируйся и{" "}
+        <span onClick={() => dispatch(setStartStatus(true))}>играй</span>{" "}
+        совершенно бесплатно!
       </p>
       <p className={styles.text}>
         Интеллектуальная игру "Quiz" покажи всем свой уровень знаний!

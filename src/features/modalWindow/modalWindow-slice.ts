@@ -1,22 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
-type initialType = [
-  {
-    [key: string]: boolean;
-  }
-];
-const initialState: initialType = [
-  {
-    startWindow: false,
-  },
-];
+type initialType = {
+  [key: string]: boolean;
+};
+const initialState: initialType = {
+  startWindow: false,
+};
 
-const questSlice = createSlice({
+const setModalSlice = createSlice({
   name: "@@modalWindow",
   initialState,
-  reducers: {},
+  reducers: {
+    setStartStatus: (state, action: PayloadAction<boolean>) => {
+      state.startWindow = action.payload;
+    },
+  },
 });
-
-export const questReducer = questSlice.reducer;
-export const selectQuest = (state: RootState) => state.quests;
+export const { setStartStatus } = setModalSlice.actions;
+export const modalWindowReducer = setModalSlice.reducer;
+export const selectModal = (state: RootState) => state.modalWindow;

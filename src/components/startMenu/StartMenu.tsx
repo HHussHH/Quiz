@@ -1,10 +1,19 @@
+import { useNavigate } from "react-router-dom";
+import {
+  selectModal,
+  setStartStatus,
+} from "../../features/modalWindow/modalWindow-slice";
+import { useAppDispatch } from "../../store";
 import styles from "./startMenu.module.scss";
-import { Dispatch } from "react";
-type startProps = {
-  setOpen: Dispatch<React.SetStateAction<boolean>>;
-};
-const StartMenu = ({ setOpen }: startProps) => {
-  const handleOpen = () => setOpen(false);
+
+const StartMenu = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const handleStart = (path: string) => {
+    dispatch(setStartStatus(false));
+    navigate(`/${path}`);
+  };
+  const handleOpen = () => dispatch(setStartStatus(false));
   return (
     <>
       <div className={styles.panelBG} onClick={handleOpen} />
@@ -45,7 +54,9 @@ const StartMenu = ({ setOpen }: startProps) => {
           </div>
         </div>
 
-        <button className={styles.btn}>Запуск</button>
+        <button className={styles.btn} onClick={() => handleStart("game")}>
+          Запуск
+        </button>
       </div>
     </>
   );

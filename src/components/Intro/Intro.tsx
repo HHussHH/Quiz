@@ -1,11 +1,10 @@
+import { setStartStatus } from "../../features/modalWindow/modalWindow-slice";
+import { useAppDispatch } from "../../store";
 import styles from "../Header/header.module.scss";
-import { useNavigate } from "react-router-dom";
-const Intro = () => {
-  const navigate = useNavigate();
 
-  const handleNavigate = (path: string) => {
-    navigate(`/${path}`);
-  };
+const Intro = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <header className={styles.intro}>
       <h1 className={styles.title}>Начни играть прямо сейчас!</h1>
@@ -17,9 +16,7 @@ const Intro = () => {
       </p>
       <button
         className={styles.btn}
-        onClick={() => {
-          handleNavigate("game");
-        }}
+        onClick={() => dispatch(setStartStatus(true))}
       >
         Старт
       </button>

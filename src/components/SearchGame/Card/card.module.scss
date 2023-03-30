@@ -1,0 +1,54 @@
+.card {
+  width: 350px;
+  height: 400px;
+  background-color: rgba(224, 177, 177, 0.445);
+  border-radius: 20px;
+}
+
+.author {
+  text-align: center;
+  margin-top: 20px;
+  color: red;
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.gameTheme {
+  padding: 20px;
+  text-align: center;
+}
+
+.questCount {
+  text-align: center;
+  font-size: 18px;
+  color: rgb(8, 128, 8);
+  margin-bottom: 20px;
+}
+
+.difficulty {
+  text-align: center;
+  font-weight: 600;
+  span {
+    color: #3407e8;
+  }
+  font-size: 24px;
+}
+
+.profile {
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
+  background-color: #434242;
+  border-radius: 50px;
+}
+.btn {
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  margin-top: 30px;
+  font-weight: 600;
+  border-radius: 20px;
+  border: none;
+  padding: 10px 20px;
+}

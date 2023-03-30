@@ -2,7 +2,7 @@ import styles from "./questConter.module.scss";
 import { useCounter } from "./useCounter";
 
 const QuestCounter = () => {
-  const [countCurrentAnswers] = useCounter();
+  const [_, countCurrentAnswers] = useCounter();
 
   return (
     <h2 className={styles.counter}>правильных ответов:{countCurrentAnswers}</h2>

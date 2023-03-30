@@ -4,11 +4,12 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-color: #ab98989a;
 }
 .panel {
   z-index: 2;
   position: fixed;
-  min-height: 900px;
+  min-height: 600px;
   height: max-content;
   width: 1000px;
   overflow: hidden;

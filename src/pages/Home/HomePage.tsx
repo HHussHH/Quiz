@@ -1,11 +1,11 @@
-import { useState } from "react";
-import Header from "../components/Header/Header";
-import Rules from "../components/Rules/Rules";
-import Footer from "../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import Rules from "../../components/Rules/Rules";
+import Footer from "../../components/Footer/Footer";
 import styles from "./homepage.module.scss";
-import StartMenu from "../components/startMenu/StartMenu";
-import { useAppSelector } from "../store";
-import { selectModal } from "../features/modalWindow/modalWindow-slice";
+import StartMenu from "../../components/startMenu/StartMenu";
+
+import { selectModal } from "../../features/modalWindow/modalWindow-slice";
+import { useAppSelector } from "../../store";
 const HomePage = () => {
   const { startWindow } = useAppSelector(selectModal);
 

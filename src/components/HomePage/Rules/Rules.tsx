@@ -1,10 +1,10 @@
 import styles from "./rules.module.scss";
-import { ReactComponent as CubeIcon } from "../../img/cube.svg";
-import { ReactComponent as IdeaIcon } from "../../img/newIdea.svg";
-import { ReactComponent as CupIcon } from "../../img/cup.svg";
-import { ReactComponent as FriendsIcon } from "../../img/friends.svg";
-import { ReactComponent as BoxIcon } from "../../img/box.svg";
-import { ReactComponent as WorldIcon } from "../../img/world.svg";
+import { ReactComponent as CubeIcon } from "../../../img/cube.svg";
+import { ReactComponent as IdeaIcon } from "../../../img/newIdea.svg";
+import { ReactComponent as CupIcon } from "../../../img/cup.svg";
+import { ReactComponent as FriendsIcon } from "../../../img/friends.svg";
+import { ReactComponent as BoxIcon } from "../../../img/box.svg";
+import { ReactComponent as WorldIcon } from "../../../img/world.svg";
 const Rules = () => {
   return (
     <div className={styles.body}>

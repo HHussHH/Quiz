@@ -1,9 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import {
-  selectModal,
-  setStartStatus,
-} from "../../features/modalWindow/modalWindow-slice";
-import { useAppDispatch } from "../../store";
+import { setStartStatus } from "../../../features/modalWindow/modalWindow-slice";
+import { useAppDispatch } from "../../../store";
 import styles from "./startMenu.module.scss";
 
 const StartMenu = () => {

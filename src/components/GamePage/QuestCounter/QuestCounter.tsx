@@ -2,6 +2,7 @@ import styles from "./questConter.module.scss";
 import { useCounter } from "./useCounter";
 
 const QuestCounter = () => {
+  // eslint-disable-next-line
   const [_, countCurrentAnswers] = useCounter();
 
   return (

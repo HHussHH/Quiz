@@ -1,7 +1,7 @@
-import Card from "../../components/Card/Card";
-import QuestCounter from "../../components/QuestCounter/QuestCounter";
-import Timer from "../../components/Timer/Timer";
-import CardPanel from "../../components/CardPanel/CardPanel";
+import Card from "../../components/GamePage/Card/Card";
+import QuestCounter from "../../components/GamePage/QuestCounter/QuestCounter";
+import Timer from "../../components/GamePage/Timer/Timer";
+import CardPanel from "../../components/GamePage/CardPanel/CardPanel";
 import { selectFinish } from "../../features/endGame/finishSlice";
 import { useAppSelector } from "../../store";
 import styles from "./gamepage.module.scss";

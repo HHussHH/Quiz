@@ -1,13 +1,13 @@
 import styles from "./card.module.scss";
-import { useAppDispatch, useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import {
   selectAnswer,
   setAnswer,
   setCurrentAnswer,
-} from "../../features/selectAnswer/answer-slice";
+} from "../../../features/selectAnswer/answer-slice";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { selectQuest } from "../../features/question/quest-slice";
-import { setFinish } from "../../features/endGame/finishSlice";
+import { selectQuest } from "../../../features/question/quest-slice";
+import { setFinish } from "../../../features/endGame/finishSlice";
 
 type CardProps = {
   setCurrentQuestId: Dispatch<SetStateAction<number>>;
@@ -31,6 +31,7 @@ const Card = ({
   //Задаем базовый вопрос(первый)
   useEffect(() => {
     setQuestIdNumber(quests[0].id);
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const Card = ({
       if (quests.length === questPosition) {
         dispatch(setFinish(true));
       }
-    }
+    } // eslint-disable-next-line
   }, [quest?.currentTime]);
 
   //Вносим в одно состояние id следующего вопроса,во второе состояение номер в массиве.
@@ -72,7 +73,7 @@ const Card = ({
     if (quest) {
       setCurrentQuestId(quest.id);
     }
-  }, [quest]);
+  }, [quest, setCurrentQuestId]);
 
   return (
     <div className={styles.card}>

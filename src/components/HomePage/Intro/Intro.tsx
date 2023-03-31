@@ -1,5 +1,5 @@
-import { setStartStatus } from "../../features/modalWindow/modalWindow-slice";
-import { useAppDispatch } from "../../store";
+import { setStartStatus } from "../../../features/modalWindow/modalWindow-slice";
+import { useAppDispatch } from "../../../store";
 import styles from "../Header/header.module.scss";
 
 const Intro = () => {

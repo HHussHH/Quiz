@@ -1,6 +1,9 @@
 import styles from "./timer.module.scss";
-import { useAppDispatch, useAppSelector } from "../../store";
-import { selectQuest, setNewTime } from "../../features/question/quest-slice";
+import { useAppDispatch, useAppSelector } from "../../../store";
+import {
+  selectQuest,
+  setNewTime,
+} from "../../../features/question/quest-slice";
 import { useEffect } from "react";
 
 type timerProps = {

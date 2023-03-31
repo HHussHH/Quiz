@@ -1,7 +1,9 @@
 .group {
-  margin: 100px 0;
+  margin: 20px 0 100px;
   display: flex;
   flex-wrap: wrap;
+
   justify-content: space-around;
-  gap: 100px 50px;
+  gap: 50px 7%;
+  padding: 100px;
 }

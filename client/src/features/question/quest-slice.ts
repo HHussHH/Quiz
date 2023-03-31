@@ -1,119 +1,56 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { quest } from "../../types";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Extra, quest } from "../../types";
 import { RootState } from "../../store";
+import axios from "axios";
+type Status = "loading" | "rejected" | "received" | "idle";
+type QuestSlice = {
+  status: Status;
+  error: string | null;
+  list: quest[];
+};
 
-const initialState: quest[] = [
-  {
-    timeForQuest: 30,
-    currentTime: 3000,
-    id: 10,
-    title: "Тот самый вопрос",
-    text: "string",
-    category: "математика",
-    difficutly: "easy",
-    answers: [
-      {
-        id: "answer_1",
-        text: "text1",
-      },
-      {
-        id: "answer_2",
-        text: "text2",
-      },
-      {
-        id: "answer_3",
-        text: "text3",
-      },
-    ],
-    currentAnswer: "answer_1",
-  },
-  {
-    timeForQuest: 20,
-    currentTime: 2,
-    id: 1,
-    title: "Вопрос2",
-    text: "string",
-    category: "фильмы",
-    difficutly: "hard",
-    answers: [
-      {
-        id: "answer_1",
-        text: "text1",
-      },
-      {
-        id: "answer_2",
-        text: "text2",
-      },
-      {
-        id: "answer_3",
-        text: "text3",
-      },
-    ],
-    currentAnswer: "answer_2",
-  },
-  {
-    timeForQuest: 42,
-    currentTime: 42,
-    id: 41,
-    title: "Вопрос3",
-    text: "string",
-    category: "фильмы",
-    difficutly: "hard",
-    answers: [
-      {
-        id: "answer_1",
-        text: "text1",
-      },
-      {
-        id: "answer_2",
-        text: "text2",
-      },
-      {
-        id: "answer_3",
-        text: "text3",
-      },
-    ],
-    currentAnswer: "answer_2",
-  },
-  {
-    timeForQuest: 10,
-    currentTime: 10,
-    id: 4231,
-    title: "Вопрос4",
-    text: "string",
-    category: "фильмы",
-    difficutly: "hard",
-    answers: [
-      {
-        id: "answer_1",
-        text: "text1",
-      },
-      {
-        id: "answer_2",
-        text: "text2",
-      },
-      {
-        id: "answer_3",
-        text: "text3",
-      },
-    ],
-    currentAnswer: "answer_2",
-  },
-];
+export const loadQuests = createAsyncThunk<
+  quest[],
+  void,
+  { rejectValue: string }
+>("quests/fetchQuests", async (_, { rejectWithValue }) => {
+  try {
+    const response = await axios.get<quest[]>(
+      "http://localhost:5000/quests/all"
+    );
+    return response.data;
+  } catch (err) {
+    return rejectWithValue("Failed to fetch quests");
+  }
+});
+
+const initialState: QuestSlice = {
+  status: "idle",
+  error: null,
+  list: [],
+};
 
 const questSlice = createSlice({
   name: "@@quest",
   initialState,
-  reducers: {
-    setNewTime: (state, action: PayloadAction<number>) => {
-      state.map((quest) => {
-        if (quest.id === action.payload) {
-          quest.currentTime = quest.currentTime - 1;
-        }
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(loadQuests.pending, (state, action) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(loadQuests.rejected, (state, action) => {
+        state.status = "rejected";
+
+        state.error = action.payload || "We don have data :(";
+      })
+      .addCase(loadQuests.fulfilled, (state, action) => {
+        state.status = "received";
+        state.list = action.payload;
       });
-    },
   },
 });
-export const { setNewTime } = questSlice.actions;
+
 export const questReducer = questSlice.reducer;
 export const selectQuest = (state: RootState) => state.quests;

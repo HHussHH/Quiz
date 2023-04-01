@@ -13,7 +13,7 @@ export const loadQuests = createAsyncThunk<
   quest[],
   void,
   { rejectValue: string }
->("quests/fetchQuests", async (_, { rejectWithValue }) => {
+>("@@quests/fetchQuests", async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get<quest[]>(
       "http://localhost:5000/quests/all"
@@ -33,7 +33,15 @@ const initialState: QuestSlice = {
 const questSlice = createSlice({
   name: "@@quest",
   initialState,
-  reducers: {},
+  reducers: {
+    setNewTime: (state, action) => {
+      state.list.map((quest) => {
+        if (quest.id === action.payload) {
+          quest.currentTime = quest.currentTime - 1;
+        }
+      });
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loadQuests.pending, (state, action) => {
@@ -51,6 +59,6 @@ const questSlice = createSlice({
       });
   },
 });
-
+export const { setNewTime } = questSlice.actions;
 export const questReducer = questSlice.reducer;
 export const selectQuest = (state: RootState) => state.quests;

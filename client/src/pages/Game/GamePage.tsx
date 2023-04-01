@@ -18,7 +18,11 @@ const GamePage = () => {
       ) : (
         <>
           <Timer currentQuestId={currentQuestId} />
-          <Card />
+          <Card
+            setCurrentQuestId={setCurrentQuestId}
+            setQuestPosition={setQuestPosition}
+            questPosition={questPosition}
+          />
           <CardPanel questPosition={questPosition} />
         </>
       )}

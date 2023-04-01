@@ -7,93 +7,113 @@ import {
 } from "../../../features/selectAnswer/answer-slice";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { setFinish } from "../../../features/endGame/finishSlice";
+import { selectQuest } from "../../../features/question/quest-slice";
 
-// type CardProps = {
-//   setCurrentQuestId: Dispatch<SetStateAction<number>>;
-//   setQuestPosition: Dispatch<SetStateAction<number>>;
-//   questPosition: number;
-// };
+type CardProps = {
+  setCurrentQuestId: Dispatch<SetStateAction<number>>;
+  setQuestPosition: Dispatch<SetStateAction<number>>;
+  questPosition: number;
+};
 
-const Card = () => {
-  // const dispatch = useAppDispatch();
-  // const answer = useAppSelector(selectAnswer);
+const Card = ({
+  setCurrentQuestId,
+  setQuestPosition,
+  questPosition,
+}: CardProps) => {
+  const dispatch = useAppDispatch();
+  const answer = useAppSelector(selectAnswer);
+  const [questIdNumber, setQuestIdNumber] = useState<number>(0);
+  const { list } = useAppSelector(selectQuest);
+  const quests = list;
+  //поиск нужного вопроса
+  const quest = quests.find((el) => el.id === questIdNumber);
 
-  // const [questIdNumber, setQuestIdNumber] = useState<number>(0);
+  const answers = [
+    {
+      id: "answer_1",
+      text: quest?.answer_1,
+    },
+    {
+      id: "answer_2",
+      text: quest?.answer_2,
+    },
+    {
+      id: "answer_3",
+      text: quest?.answer_3,
+    },
+  ];
+  //Задаем базовый вопрос(первый)
+  useEffect(() => {
+    setQuestIdNumber(quests[0].id);
+    // eslint-disable-next-line
+  }, []);
 
-  // //поиск нужного вопроса
-  // const quest = quests.find((el) => el.id === questIdNumber);
-  // //Задаем базовый вопрос(первый)
-  // useEffect(() => {
-  //   setQuestIdNumber(quests[0].id);
-  //   // eslint-disable-next-line
-  // }, []);
+  useEffect(() => {
+    if (quest?.currentTime === 0) {
+      if (quests.length > questPosition) {
+        setQuestPosition((q) => q + 1);
+        setQuestIdNumber(quests[questPosition].id);
+        dispatch(setAnswer(""));
+      }
+      if (quests.length === questPosition) {
+        dispatch(setFinish(true));
+      }
+    } // eslint-disable-next-line
+  }, [quest?.currentTime]);
 
-  // useEffect(() => {
-  //   if (quest?.currentTime === 0) {
-  //     if (quests.length > questPosition) {
-  //       setQuestPosition((q) => q + 1);
-  //       setQuestIdNumber(quests[questPosition].id);
-  //       dispatch(setAnswer(""));
-  //     }
-  //     if (quests.length === questPosition) {
-  //       dispatch(setFinish(true));
-  //     }
-  //   } // eslint-disable-next-line
-  // }, [quest?.currentTime]);
+  // Вносим в одно состояние id следующего вопроса,во второе состояение номер в массиве.
+  const answerBtn = () => {
+    if (quests.length > questPosition) {
+      setQuestPosition((q) => q + 1);
+      setQuestIdNumber(quests[questPosition].id);
+      dispatch(setAnswer(""));
+    }
 
-  // //Вносим в одно состояние id следующего вопроса,во второе состояение номер в массиве.
-  // const nextQuest = () => {
-  //   if (quests.length > questPosition) {
-  //     setQuestPosition((q) => q + 1);
-  //     setQuestIdNumber(quests[questPosition].id);
-  //     dispatch(setAnswer(""));
-  //   }
+    if (quest?.currentAnswer === answer) {
+      dispatch(setCurrentAnswer());
+    }
 
-  //   if (quest?.currentAnswer === answer) {
-  //     dispatch(setCurrentAnswer());
-  //   }
+    if (quests.length === questPosition) {
+      dispatch(setFinish(true));
+    }
+  };
+  // обработка выбраного ответа
+  const handleClick = (id: string) => {
+    dispatch(setAnswer(id));
+  };
 
-  //   if (quests.length === questPosition) {
-  //     dispatch(setFinish(true));
-  //   }
-  // };
-  // //обработка выбраного ответа
-  // const handleClick = (id: string) => {
-  //   dispatch(setAnswer(id));
-  // };
-
-  // //обновление данных для текущего вопроса
-  // useEffect(() => {
-  //   if (quest) {
-  //     setCurrentQuestId(quest.id);
-  //   }
-  // }, [quest, setCurrentQuestId]);
+  //обновление данных для текущего вопроса
+  useEffect(() => {
+    if (quest) {
+      setCurrentQuestId(quest.id);
+    }
+  }, [quest, setCurrentQuestId]);
 
   return (
     <div className={styles.card}>
       <div className={styles.bg}>
-        <h1 className={styles.title}>title</h1>
-        <p className={styles.text}>text</p>
+        <h1 className={styles.title}>{quest?.title}</h1>
+        <p className={styles.text}>{quest?.title}</p>
         <div className={styles.difficult}>
-          Difficulty: <span>difficutly</span>
+          Difficulty: <span>{quest?.difficutly}</span>
         </div>
         <div className={styles.variants}>
-          {/* {quest?.answers.map(({ text, id }, key) => (
+          {answers.map(({ text, id }) => (
             <button
               className={`${styles.variant} ${
                 answer === id ? styles.active : ""
               }`}
               onClick={() => handleClick(id)}
-              key={key}
+              key={id}
             >
               {text}
             </button>
-          ))} */}
-
-          <button className={styles.variant}>text</button>
+          ))}
         </div>
         <div className={styles.optionalBtn}>
-          <button className={styles.btn}>Ответить</button>
+          <button className={styles.btn} onClick={answerBtn}>
+            Ответить
+          </button>
         </div>
       </div>
     </div>

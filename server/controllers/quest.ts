@@ -18,7 +18,31 @@ type quest = {
 };
 
 export const getQuests = (_: Request, res: Response) => {
-  const q = `SELECT * FROM questions`;
+  const q = `SELECT * FROM questions `;
+
+  db.query(q, (_, data: quest[]) => {
+    return res.json(data);
+  });
+};
+
+export const getQuestsWithDiffEasy = (_: Request, res: Response) => {
+  const q = `SELECT * FROM questions WHERE difficutly = 'easy'`;
+
+  db.query(q, (_, data: quest[]) => {
+    return res.json(data);
+  });
+};
+
+export const getQuestsWithDiffNormal = (_: Request, res: Response) => {
+  const q = `SELECT * FROM questions WHERE difficutly = 'normal'`;
+
+  db.query(q, (_, data: quest[]) => {
+    return res.json(data);
+  });
+};
+
+export const getQuestsWithDiffHard = (_: Request, res: Response) => {
+  const q = `SELECT * FROM questions WHERE difficutly = 'hard'`;
 
   db.query(q, (_, data: quest[]) => {
     return res.json(data);

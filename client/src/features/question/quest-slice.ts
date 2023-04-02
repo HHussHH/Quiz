@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Extra, quest } from "../../types";
+import { categoriec, quest } from "../../types";
 import { RootState } from "../../store";
 import axios from "axios";
 type Status = "loading" | "rejected" | "received" | "idle";
@@ -34,12 +34,18 @@ const questSlice = createSlice({
   name: "@@quest",
   initialState,
   reducers: {
-    setNewTime: (state, action) => {
+    setNewTime: (state, action: PayloadAction<quest["id"]>) => {
       state.list.map((quest) => {
         if (quest.id === action.payload) {
           quest.currentTime = quest.currentTime - 1;
         }
       });
+    },
+    setNewFilters: (state, action: PayloadAction<categoriec>) => {
+      state.list = state.list.filter(
+        (el) =>
+          el.category.toLocaleLowerCase() === action.payload.toLocaleLowerCase()
+      );
     },
   },
   extraReducers: (builder) => {
@@ -59,6 +65,6 @@ const questSlice = createSlice({
       });
   },
 });
-export const { setNewTime } = questSlice.actions;
+export const { setNewTime, setNewFilters } = questSlice.actions;
 export const questReducer = questSlice.reducer;
 export const selectQuest = (state: RootState) => state.quests;

@@ -6,12 +6,10 @@ import React, { FunctionComponent, ChangeEvent } from "react";
 
 const GameFilter = () => {
   const dispatch = useAppDispatch();
-
-  type SectionProps = {
-    value: categoriec;
-    onChange: (event: ChangeEvent<{ value: categoriec }>) => void;
-  };
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLSelectElement & { value: categoriec }>
+  ) => {
+    dispatch(setNewFilters(e.target.value));
     console.log(e.target.value);
   };
   return (
@@ -31,11 +29,11 @@ const GameFilter = () => {
 
         <div className={styles.theme}>
           <h3 className={styles.title}>Выберите темы:</h3>
-          <select className={styles.select} onChange={() => handleChange}>
+          <select className={styles.select} onChange={handleChange}>
             <option value="Все">Все</option>
             <option value="Математика">Математика</option>
-            <option value="Программирование">Программирование</option>
-            <option value="Фильмы">Фильмы/Сериалы</option>
+            <option value="программирование">программирование</option>
+            <option value="фильмы">фильмы</option>
           </select>
         </div>
 

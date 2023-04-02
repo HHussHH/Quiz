@@ -2,7 +2,7 @@ export type difficult = "easy" | "normal" | "hard";
 export type categoriec =
   | "Все"
   | "фильмы"
-  | "сериалы"
+  | "программирование"
   | "история"
   | "математика";
 

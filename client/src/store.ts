@@ -8,6 +8,7 @@ import { modalWindowReducer } from "./features/modalWindow/modalWindow-slice";
 import { gameSettingReducer } from "./features/gameSettings/setting-slice";
 import axios from "axios";
 import * as api from "./config";
+import { userReducer } from "./features/User/user-slice";
 export const store = configureStore({
   reducer: {
     quests: questReducer,
@@ -15,6 +16,7 @@ export const store = configureStore({
     finish: finishReducer,
     modalWindow: modalWindowReducer,
     gameSettings: gameSettingReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

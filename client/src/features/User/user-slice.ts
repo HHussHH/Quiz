@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Status, user } from "../../types";
 import axios from "axios";
+import { RootState } from "../../store";
 type UserSlice = {
   status: Status;
   error: string | null;
@@ -11,7 +12,9 @@ export const loadUser = createAsyncThunk<user[], void, { rejectValue: string }>(
   "@@user/fethUser",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get<user[]>("someLink");
+      const response = await axios.get<user[]>(
+        "http://localhost:5000/users/user"
+      );
       return response.data;
     } catch (err) {
       return rejectWithValue("Failed to fetch");
@@ -44,3 +47,6 @@ const userSlice = createSlice({
     });
   },
 });
+
+export const userReducer = userSlice.reducer;
+export const selectUser = (state: RootState) => state.user;

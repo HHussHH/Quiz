@@ -1,9 +1,17 @@
+import { loadUser } from "../../../features/User/user-slice";
+import { useAppDispatch } from "../../../store";
 import styles from "./form.module.scss";
 
 const RegisterForm = () => {
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(loadUser());
+  };
   return (
     <div className={styles.form}>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>Регистрация</h2>
         <input placeholder="Введите вашу почту" type="email" />
         <input placeholder="Введите логин" type="text" />

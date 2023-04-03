@@ -25,6 +25,7 @@ const Card = ({
   const [questIdNumber, setQuestIdNumber] = useState<number>(0);
   const { list } = useAppSelector(selectQuest);
   const quests = list;
+
   //поиск нужного вопроса
   const quest = quests.find((el) => el.id === questIdNumber);
 
@@ -42,11 +43,17 @@ const Card = ({
       text: quest?.answer_3,
     },
   ];
+
   //Задаем базовый вопрос(первый)
   useEffect(() => {
-    setQuestIdNumber(quests[0].id);
+    if (quests.length > 0) {
+      if (quest) setQuestIdNumber(quest.id);
+      else {
+        setQuestIdNumber(quests[0].id);
+      }
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [quests]);
 
   useEffect(() => {
     if (quest?.currentTime === 0) {
@@ -91,31 +98,35 @@ const Card = ({
 
   return (
     <div className={styles.card}>
-      <div className={styles.bg}>
-        <h1 className={styles.title}>{quest?.title}</h1>
-        <p className={styles.text}>{quest?.title}</p>
-        <div className={styles.difficult}>
-          Difficulty: <span>{quest?.difficutly}</span>
-        </div>
-        <div className={styles.variants}>
-          {answers.map(({ text, id }) => (
-            <button
-              className={`${styles.variant} ${
-                answer === id ? styles.active : ""
-              }`}
-              onClick={() => handleClick(id)}
-              key={id}
-            >
-              {text}
+      {quests.length === 0 ? (
+        "loading..."
+      ) : (
+        <div className={styles.bg}>
+          <h1 className={styles.title}>{quest?.title}</h1>
+          <p className={styles.text}>{quest?.title}</p>
+          <div className={styles.difficult}>
+            Difficulty: <span>{quest?.difficutly}</span>
+          </div>
+          <div className={styles.variants}>
+            {answers.map(({ text, id }) => (
+              <button
+                className={`${styles.variant} ${
+                  answer === id ? styles.active : ""
+                }`}
+                onClick={() => handleClick(id)}
+                key={id}
+              >
+                {text}
+              </button>
+            ))}
+          </div>
+          <div className={styles.optionalBtn}>
+            <button className={styles.btn} onClick={answerBtn}>
+              Ответить
             </button>
-          ))}
+          </div>
         </div>
-        <div className={styles.optionalBtn}>
-          <button className={styles.btn} onClick={answerBtn}>
-            Ответить
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

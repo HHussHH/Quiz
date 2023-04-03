@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { categoriec, quest } from "../../types";
+import { categoriec, quest, Status } from "../../types";
 import { RootState } from "../../store";
 import axios from "axios";
-type Status = "loading" | "rejected" | "received" | "idle";
+
 type QuestSlice = {
   status: Status;
   error: string | null;

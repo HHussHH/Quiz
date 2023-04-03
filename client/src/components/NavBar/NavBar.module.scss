@@ -16,6 +16,7 @@
 
 .menu {
   padding-top: 20px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,6 +34,7 @@
 }
 
 .profile {
+  position: relative;
   display: flex;
   gap: 40px;
   text-align: center;

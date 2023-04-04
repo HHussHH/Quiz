@@ -8,7 +8,7 @@ import {
 
 const router = express.Router();
 
-router.get("/all", getQuests);
+router.get("/all?cat", getQuests);
 router.get("/easy", getQuestsWithDiffEasy);
 router.get("/normal", getQuestsWithDiffNormal);
 router.get("/hard", getQuestsWithDiffHard);

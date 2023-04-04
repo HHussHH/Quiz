@@ -11,8 +11,9 @@ type user = {
   coins: number;
 };
 
-export const getUser = (_: Request, res: Response) => {
-  const q = `SELECT * FROM Users WHERE useId='1 ' `;
+export const getUser = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const q = `SELECT * FROM Users WHERE useId = ${id} `;
 
   db.query(q, (_, data: user[]) => {
     return res.json(data);

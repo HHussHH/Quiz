@@ -17,8 +17,11 @@ type quest = {
   currentTime: number;
 };
 
-export const getQuests = (_: Request, res: Response) => {
-  const q = `SELECT * FROM questions `;
+export const getQuests = (req: Request, res: Response) => {
+  const cat = req.query.cat;
+  const { lim } = req.params;
+  console.log(lim);
+  const q = `SELECT * FROM questions WHERE category = '${cat}' `;
 
   db.query(q, (_, data: quest[]) => {
     return res.json(data);

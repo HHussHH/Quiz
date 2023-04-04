@@ -2,7 +2,7 @@ import styles from "./NavBar.module.scss";
 import { ImSearch } from "react-icons/im";
 import { CgProfile } from "react-icons/cg";
 import { ReactComponent as LogoIcon } from "../../img/logo.svg";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import RegisterForm from "./Register/RegisterForm";
 import { useAppSelector } from "../../store";

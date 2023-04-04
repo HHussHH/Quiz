@@ -1,6 +1,11 @@
 import { db } from "../db";
-export type difficult = "easy" | "normal" | "hard";
-export type categoriec = "фильмы" | "сериалы" | "история" | "математика";
+export type difficult = "easy" | "normal" | "hard" | "all";
+export type categoriec =
+  | "фильмы"
+  | "сериалы"
+  | "история"
+  | "математика"
+  | "все";
 import { Request, Response } from "express";
 
 type quest = {
@@ -19,7 +24,9 @@ type quest = {
 
 export const getQuests = (req: Request, res: Response) => {
   const cat =
-    req.query.cat === "все" ? "'математика','фильмы'" : `'${req.query.cat}'`;
+    req.query.cat === "все"
+      ? "'математика','фильмы','сериалы','история'"
+      : `'${req.query.cat}'`;
   const lim = req.query.lim;
   const diff =
     req.query.diff === "all" ? "'easy','normal','hard'" : `'${req.query.diff}'`;

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { categoriec, limit, quest, Status } from "../../types";
+import { categoriec, difficulty, limit, quest, Status } from "../../types";
 import { RootState } from "../../store";
 import axios from "axios";
 
@@ -14,14 +14,13 @@ export const loadQuests = createAsyncThunk<
   {
     cat: categoriec;
     lim: limit;
+    diff: difficulty;
   },
   { rejectValue: string }
->("@@quests/fetchQuests", async ({ cat, lim }, { rejectWithValue }) => {
+>("@@quests/fetchQuests", async ({ cat, diff, lim }, { rejectWithValue }) => {
   try {
-    console.log(cat);
-    console.log(lim);
     const response = await axios.get<quest[]>(
-      `http://localhost:5000/quests/all?cat=${cat}&lim=${lim}`
+      `http://localhost:5000/quests/all?cat=${cat}&lim=${lim}&diff=${diff}`
     );
     return response.data;
   } catch (err) {
@@ -40,17 +39,12 @@ const questSlice = createSlice({
   initialState,
   reducers: {
     setNewTime: (state, action: PayloadAction<quest["id"]>) => {
+      // eslint-disable-next-line
       state.list.map((quest) => {
         if (quest.id === action.payload) {
           quest.currentTime = quest.currentTime - 1;
         }
       });
-    },
-    setNewFilters: (state, action: PayloadAction<categoriec>) => {
-      state.list = state.list.filter(
-        (el) =>
-          el.category.toLocaleLowerCase() === action.payload.toLocaleLowerCase()
-      );
     },
   },
   extraReducers: (builder) => {
@@ -70,6 +64,6 @@ const questSlice = createSlice({
       });
   },
 });
-export const { setNewTime, setNewFilters } = questSlice.actions;
+export const { setNewTime } = questSlice.actions;
 export const questReducer = questSlice.reducer;
 export const selectQuest = (state: RootState) => state.quests;

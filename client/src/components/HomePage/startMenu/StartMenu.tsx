@@ -1,17 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { setStartStatus } from "../../../features/modalWindow/modalWindow-slice";
-import { useAppDispatch } from "../../../store";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import styles from "./startMenu.module.scss";
 import GameFilter from "./GameFilter";
 import { loadQuests } from "../../../features/question/quest-slice";
-import { useEffect } from "react";
+import { selectSettings } from "../../../features/gameSettings/setting-slice";
 
 const StartMenu = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { difficulty, category, limit } = useAppSelector(selectSettings);
+
   const handleStart = (path: string) => {
     dispatch(setStartStatus(false));
-    dispatch(loadQuests({ cat: "фильмы", lim: 10 }));
+    console.log(difficulty, category, limit);
+    dispatch(loadQuests({ cat: category, lim: limit, diff: difficulty }));
     navigate(`/${path}`);
   };
   const handleOpen = () => dispatch(setStartStatus(false));

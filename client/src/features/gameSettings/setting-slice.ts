@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
-import { count, difficulty, settings, theme } from "../../types";
+import { limit, difficulty, settings, categoriec } from "../../types";
 
 const initialState: settings = {
   difficulty: "all",
-  theme: "all",
-  count: 5,
+  category: "все",
+  count: 10,
 };
 
 const gameSettingsSlice = createSlice({
@@ -15,10 +15,10 @@ const gameSettingsSlice = createSlice({
     setDiff: (state, action: PayloadAction<difficulty>) => {
       state.difficulty = action.payload;
     },
-    setTheme: (state, action: PayloadAction<theme>) => {
-      state.theme = action.payload;
+    setTheme: (state, action: PayloadAction<categoriec>) => {
+      state.category = action.payload;
     },
-    setCount: (state, action: PayloadAction<count>) => {
+    setCount: (state, action: PayloadAction<limit>) => {
       state.count = action.payload;
     },
   },

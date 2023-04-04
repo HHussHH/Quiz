@@ -8,7 +8,7 @@ type quest = {
   title: string;
   text: string;
   category: categoriec;
-  difficutly: difficult;
+  difficulty: difficult;
   answer_1: string;
   answer_2: string;
   answer_3: string;
@@ -18,11 +18,13 @@ type quest = {
 };
 
 export const getQuests = (req: Request, res: Response) => {
-  const cat = req.query.cat;
-  const { lim } = req.params;
-  console.log(lim);
-  const q = `SELECT * FROM questions WHERE category = '${cat}' `;
+  const cat =
+    req.query.cat === "все" ? "'математика','фильмы'" : `'${req.query.cat}'`;
+  const lim = req.query.lim;
+  const diff =
+    req.query.diff === "all" ? "'easy','normal','hard'" : `'${req.query.diff}'`;
 
+  const q = `SELECT * FROM questions WHERE category IN (${cat}) AND difficulty IN (${diff})  LIMIT ${lim} `;
   db.query(q, (_, data: quest[]) => {
     return res.json(data);
   });

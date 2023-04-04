@@ -9,6 +9,7 @@ import { gameSettingReducer } from "./features/gameSettings/setting-slice";
 import axios from "axios";
 import * as api from "./config";
 import { userReducer } from "./features/User/user-slice";
+
 export const store = configureStore({
   reducer: {
     quests: questReducer,

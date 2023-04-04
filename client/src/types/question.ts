@@ -1,16 +1,10 @@
-export type difficult = "easy" | "normal" | "hard";
+export type difficulty = "all" | "easy" | "normal" | "hard";
 export type categoriec =
-  | "Все"
+  | "все"
   | "фильмы"
   | "программирование"
   | "история"
   | "математика";
-
-type Answers = [
-  { [key: string]: string },
-  { [key: string]: string },
-  { [key: string]: string }
-];
 
 type current = "answer_1" | "answer_2" | "answer_3";
 
@@ -19,7 +13,7 @@ export type quest = {
   title: string;
   text: string;
   category: categoriec;
-  difficutly: difficult;
+  difficulty: difficulty;
   answer_1: string;
   answer_2: string;
   answer_3: string;

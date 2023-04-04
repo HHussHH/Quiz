@@ -3,12 +3,15 @@ import { setStartStatus } from "../../../features/modalWindow/modalWindow-slice"
 import { useAppDispatch } from "../../../store";
 import styles from "./startMenu.module.scss";
 import GameFilter from "./GameFilter";
+import { loadQuests } from "../../../features/question/quest-slice";
+import { useEffect } from "react";
 
 const StartMenu = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleStart = (path: string) => {
     dispatch(setStartStatus(false));
+    dispatch(loadQuests({ cat: "фильмы", lim: 10 }));
     navigate(`/${path}`);
   };
   const handleOpen = () => dispatch(setStartStatus(false));

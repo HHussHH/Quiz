@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { categoriec, quest, Status } from "../../types";
+import { categoriec, limit, quest, Status } from "../../types";
 import { RootState } from "../../store";
 import axios from "axios";
 
@@ -11,12 +11,17 @@ type QuestSlice = {
 
 export const loadQuests = createAsyncThunk<
   quest[],
-  void,
+  {
+    cat: categoriec;
+    lim: limit;
+  },
   { rejectValue: string }
->("@@quests/fetchQuests", async (_, { rejectWithValue }) => {
+>("@@quests/fetchQuests", async ({ cat, lim }, { rejectWithValue }) => {
   try {
+    console.log(cat);
+    console.log(lim);
     const response = await axios.get<quest[]>(
-      "http://localhost:5000/quests/all"
+      `http://localhost:5000/quests/all?cat=${cat}&lim=${lim}`
     );
     return response.data;
   } catch (err) {

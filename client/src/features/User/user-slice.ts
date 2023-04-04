@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Status, user } from "../../types";
 import axios from "axios";
 import { RootState } from "../../store";
-import { useParams } from "react-router-dom";
+
 type UserSlice = {
   status: Status;
   error: string | null;
@@ -13,7 +13,6 @@ export const loadUser = createAsyncThunk<user[], void, { rejectValue: string }>(
   "@@user/fethUser",
   async (_, { rejectWithValue }) => {
     try {
-      // const { id } = useParams();
       const id = 1;
       const response = await axios.get<user[]>(
         `http://localhost:5000/users/user/${id}`

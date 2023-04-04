@@ -1,7 +1,7 @@
 export type role = "user" | "vip" | "admin";
 
 export type user = {
-  useId: number;
+  userId: number;
   username: string;
   mail: string;
   password: string;

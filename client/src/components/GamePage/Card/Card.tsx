@@ -105,7 +105,7 @@ const Card = ({
           <h1 className={styles.title}>{quest?.title}</h1>
           <p className={styles.text}>{quest?.title}</p>
           <div className={styles.difficult}>
-            Difficulty: <span>{quest?.difficutly}</span>
+            Difficulty: <span>{quest?.difficulty}</span>
           </div>
           <div className={styles.variants}>
             {answers.map(({ text, id }) => (

@@ -5,8 +5,11 @@ import { ReactComponent as LogoIcon } from "../../img/logo.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import RegisterForm from "./Register/RegisterForm";
+import { useAppSelector } from "../../store";
+import { selectUser } from "../../features/User/user-slice";
 const NavBar = () => {
   const [windowOpen, setWindowOpen] = useState<boolean>(false);
+  const { list } = useAppSelector(selectUser);
   return (
     <div className={styles.nav}>
       <div className="container">
@@ -27,7 +30,7 @@ const NavBar = () => {
               size={28}
               onClick={() => setWindowOpen(!windowOpen)}
             />
-            <span>Гость</span>
+            <span>{list.username}</span>
             {windowOpen ? <RegisterForm /> : ""}
           </div>
         </nav>

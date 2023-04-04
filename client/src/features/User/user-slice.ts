@@ -9,15 +9,43 @@ type UserSlice = {
   list: user;
 };
 
-export const loadUser = createAsyncThunk<user[], void, { rejectValue: string }>(
-  "@@user/fethUser",
-  async (_, { rejectWithValue }) => {
+export const loadUser = createAsyncThunk<
+  user[],
+  {
+    login: string;
+    password: string;
+  },
+  { rejectValue: string }
+>("@@user/fethUser", async ({ login, password }, { rejectWithValue }) => {
+  try {
+    const response = await axios.get<user[]>(
+      `http://localhost:5000/users/user?username=${login}&password=${password}`
+    );
+    return response.data;
+  } catch (err) {
+    return rejectWithValue("Failed to fetch");
+  }
+});
+
+export const registerUser = createAsyncThunk<
+  user[],
+  {
+    login: string;
+    email: string;
+    password: string;
+  },
+  { rejectValue: string }
+>(
+  "@@user/registerUser",
+  async ({ login, email, password }, { rejectWithValue }) => {
     try {
-      const id = 1;
       const response = await axios.get<user[]>(
-        `http://localhost:5000/users/user/${id}`
+        `http://localhost:5000/users/register?username=${login}&email=${email}&password=${password}`
       );
-      return response.data;
+      const responseData = await axios.get<user[]>(
+        `http://localhost:5000/users/user?username=${login}&password=${password}`
+      );
+      return responseData.data;
     } catch (err) {
       return rejectWithValue("Failed to fetch");
     }
@@ -27,8 +55,8 @@ const initialState: UserSlice = {
   status: "idle",
   error: null,
   list: {
-    useId: 0,
-    username: "",
+    userId: 0,
+    username: "Гость",
     mail: "",
     password: "",
     role: "user",
@@ -50,6 +78,12 @@ const userSlice = createSlice({
       state.error = action.payload || "we dont have this data";
     });
     builder.addCase(loadUser.fulfilled, (state, action) => {
+      state.status = "received";
+      state.error = null;
+      console.log(action.payload);
+      state.list = action.payload[0];
+    });
+    builder.addCase(registerUser.fulfilled, (state, action) => {
       state.status = "received";
       state.error = null;
       console.log(action.payload);

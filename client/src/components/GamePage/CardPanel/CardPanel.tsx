@@ -1,12 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useCounter } from "../QuestCounter/useCounter";
 import styles from "./CardPanel.module.scss";
+import { selectQuest } from "../../../features/question/quest-slice";
+import { useAppSelector } from "../../../store";
 type panelType = {
   questPosition: number;
 };
-const CardPanel = ({ questPosition }: panelType) => {
+const CardPanel = () => {
   const navigate = useNavigate();
   const [countQuestions] = useCounter();
+
+  const { list, currentQuest } = useAppSelector(selectQuest);
+  const index = list.findIndex((quest) => quest.id === currentQuest);
+  const position = index + 1;
   return (
     <div className={styles.panel}>
       <div className={styles.inner}>
@@ -18,7 +24,7 @@ const CardPanel = ({ questPosition }: panelType) => {
           Всего вопросов:<span> {countQuestions}</span>
         </p>
         <p className={styles.currentQuestion}>
-          Вы на <span>{questPosition}</span> вопросе
+          Вы на <span>{position}</span> вопросе
         </p>
 
         <div className={styles.btns}>

@@ -5,16 +5,13 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../store";
 import styles from "./timer.module.scss";
 import { useEffect } from "react";
-type timerProps = {
-  currentQuestId: number;
-};
 
-const Timer = ({ currentQuestId }: timerProps) => {
+const Timer = () => {
   const dispatch = useAppDispatch();
-  const { list } = useAppSelector(selectQuest);
+  const { list, currentQuest } = useAppSelector(selectQuest);
 
   //находим время для нужного нам квеста по его id
-  const questTime = list.find((el) => el.id === currentQuestId);
+  const questTime = list.find((el) => el.id === currentQuest);
   //Берем данные о том, сколько времени осталось
   const newTime = questTime?.currentTime;
   //Берем данные о том, сколько времени было дано
@@ -25,7 +22,7 @@ const Timer = ({ currentQuestId }: timerProps) => {
     const intervalId = setInterval(() => {
       if (newTime) {
         if (newTime > 0) {
-          dispatch(setNewTime(currentQuestId));
+          dispatch(setNewTime(currentQuest));
         } else {
           clearInterval(intervalId);
         }
@@ -33,7 +30,7 @@ const Timer = ({ currentQuestId }: timerProps) => {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [currentQuestId, newTime, dispatch]);
+  }, [currentQuest, newTime, dispatch]);
 
   //формула для высчита длины полосы в % соотношении ко времени
   const width = (number: number, base: number) => {

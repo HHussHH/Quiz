@@ -5,30 +5,21 @@ import {
   setAnswer,
   setCurrentAnswer,
 } from "../../../features/selectAnswer/answer-slice";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { setFinish } from "../../../features/endGame/finishSlice";
-import { selectQuest } from "../../../features/question/quest-slice";
+import {
+  selectQuest,
+  setNewCurrentQuest,
+} from "../../../features/question/quest-slice";
 
-type CardProps = {
-  setCurrentQuestId: Dispatch<SetStateAction<number>>;
-  setQuestPosition: Dispatch<SetStateAction<number>>;
-  questPosition: number;
-};
-
-const Card = ({
-  setCurrentQuestId,
-  setQuestPosition,
-  questPosition,
-}: CardProps) => {
+const Card = () => {
   const dispatch = useAppDispatch();
   const answer = useAppSelector(selectAnswer);
-  const [questIdNumber, setQuestIdNumber] = useState<number>(0);
-  const { list } = useAppSelector(selectQuest);
-  const quests = list;
-
+  const { list, currentQuest } = useAppSelector(selectQuest);
   //поиск нужного вопроса
-  const quest = quests.find((el) => el.id === questIdNumber);
+  const quest = list.find((el) => el.id === currentQuest);
 
+  const index = list.findIndex((quest) => quest.id === currentQuest);
   const answers = [
     {
       id: "answer_1",
@@ -46,42 +37,36 @@ const Card = ({
 
   //Задаем базовый вопрос(первый)
   useEffect(() => {
-    if (quests.length > 0) {
-      if (quest) setQuestIdNumber(quest.id);
+    if (list.length > 0) {
+      if (quest) dispatch(setNewCurrentQuest(quest.id));
       else {
-        setQuestIdNumber(quests[0].id);
+        dispatch(setNewCurrentQuest(list[index].id));
       }
     }
-    // eslint-disable-next-line
-  }, [quests]);
+  }, []);
 
   useEffect(() => {
     if (quest?.currentTime === 0) {
-      if (quests.length > questPosition) {
-        setQuestPosition((q) => q + 1);
-        setQuestIdNumber(quests[questPosition].id);
+      if (list.length > index) {
+        const next = index + 1 === list.length ? index : index + 1;
         dispatch(setAnswer(""));
-      }
-      if (quests.length === questPosition) {
-        dispatch(setFinish(true));
+        dispatch(setNewCurrentQuest(list[next].id));
+        if (list.length === index + 1) dispatch(setFinish(true));
       }
     } // eslint-disable-next-line
   }, [quest?.currentTime]);
 
   // Вносим в одно состояние id следующего вопроса,во второе состояение номер в массиве.
   const answerBtn = () => {
-    if (quests.length > questPosition) {
-      setQuestPosition((q) => q + 1);
-      setQuestIdNumber(quests[questPosition].id);
+    if (list.length > index) {
+      const next = index + 1 === list.length ? index : index + 1;
       dispatch(setAnswer(""));
+      dispatch(setNewCurrentQuest(list[next].id));
+      if (list.length === index + 1) dispatch(setFinish(true));
     }
 
     if (quest?.currentAnswer === answer) {
       dispatch(setCurrentAnswer());
-    }
-
-    if (quests.length === questPosition) {
-      dispatch(setFinish(true));
     }
   };
   // обработка выбраного ответа
@@ -89,16 +74,9 @@ const Card = ({
     dispatch(setAnswer(id));
   };
 
-  //обновление данных для текущего вопроса
-  useEffect(() => {
-    if (quest) {
-      setCurrentQuestId(quest.id);
-    }
-  }, [quest, setCurrentQuestId]);
-
   return (
     <div className={styles.card}>
-      {quests.length === 0 ? (
+      {list.length === 0 ? (
         "loading..."
       ) : (
         <div className={styles.bg}>

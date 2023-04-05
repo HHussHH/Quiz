@@ -7,6 +7,7 @@ type QuestSlice = {
   status: Status;
   error: string | null;
   list: quest[];
+  currentQuest: quest["id"];
 };
 
 export const loadQuests = createAsyncThunk<
@@ -32,6 +33,7 @@ const initialState: QuestSlice = {
   status: "idle",
   error: null,
   list: [],
+  currentQuest: 0,
 };
 
 const questSlice = createSlice({
@@ -45,6 +47,9 @@ const questSlice = createSlice({
           quest.currentTime = quest.currentTime - 1;
         }
       });
+    },
+    setNewCurrentQuest: (state, action: PayloadAction<quest["id"]>) => {
+      state.currentQuest = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -61,9 +66,10 @@ const questSlice = createSlice({
       .addCase(loadQuests.fulfilled, (state, action) => {
         state.status = "received";
         state.list = action.payload;
+        state.currentQuest = action.payload[0].id;
       });
   },
 });
-export const { setNewTime } = questSlice.actions;
+export const { setNewTime, setNewCurrentQuest } = questSlice.actions;
 export const questReducer = questSlice.reducer;
 export const selectQuest = (state: RootState) => state.quests;

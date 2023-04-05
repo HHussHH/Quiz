@@ -1,36 +1,39 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { questReducer } from "./features/question/quest-slice";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+
+import { questReducer } from "./features/question/quest-slice";
 import { answerReducer } from "./features/selectAnswer/answer-slice";
 import { finishReducer } from "./features/endGame/finishSlice";
 import { modalWindowReducer } from "./features/modalWindow/modalWindow-slice";
 import { gameSettingReducer } from "./features/gameSettings/setting-slice";
-import axios from "axios";
-import * as api from "./config";
 import { userReducer } from "./features/User/user-slice";
 
+const persistConfig = {
+  key: "root",
+  storage,
+};
+const rootReducer = combineReducers({
+  quests: questReducer,
+  currentAnswer: answerReducer,
+  finish: finishReducer,
+  modalWindow: modalWindowReducer,
+  gameSettings: gameSettingReducer,
+  user: userReducer,
+});
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = configureStore({
-  reducer: {
-    quests: questReducer,
-    currentAnswer: answerReducer,
-    finish: finishReducer,
-    modalWindow: modalWindowReducer,
-    gameSettings: gameSettingReducer,
-    user: userReducer,
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      thunk: {
-        extraArgument: {
-          client: axios,
-          api,
-        },
-      },
       serializableCheck: false,
     }),
 });
 
+export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;

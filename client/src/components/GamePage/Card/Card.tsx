@@ -81,7 +81,7 @@ const Card = () => {
       ) : (
         <div className={styles.bg}>
           <h1 className={styles.title}>{quest?.title}</h1>
-          <p className={styles.text}>{quest?.title}</p>
+          <p className={styles.text}>{quest?.text}</p>
           <div className={styles.difficult}>
             Difficulty: <span>{quest?.difficulty}</span>
           </div>

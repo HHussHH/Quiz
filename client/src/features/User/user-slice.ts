@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Status, user } from "../../types";
 import axios from "axios";
 import { RootState } from "../../store";
@@ -68,7 +68,11 @@ const initialState: UserSlice = {
 const userSlice = createSlice({
   name: "@@user/",
   initialState,
-  reducers: {},
+  reducers: {
+    ExitIntoAccount: (state, action: PayloadAction<user>) => {
+      state.list = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(loadUser.pending, (state, action) => {
       state.status = "loading";
@@ -94,4 +98,5 @@ const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
+export const { ExitIntoAccount } = userSlice.actions;
 export const selectUser = (state: RootState) => state.user;

@@ -4,12 +4,16 @@ import { CgProfile } from "react-icons/cg";
 import { ReactComponent as LogoIcon } from "../../img/logo.svg";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import RegisterForm from "./Register/RegisterForm";
 import { useAppSelector } from "../../store";
 import { selectUser } from "../../features/User/user-slice";
+import RegisterProfile from "./UserInfo/RegisterProfile";
+import Profile from "./UserInfo/Profile";
 const NavBar = () => {
   const [windowOpen, setWindowOpen] = useState<boolean>(false);
   const { list } = useAppSelector(selectUser);
+
+  const registerWindow = windowOpen ? <RegisterProfile /> : "";
+  const profileWindow = windowOpen ? <Profile /> : "";
   return (
     <div className={styles.nav}>
       <div className="container">
@@ -31,7 +35,7 @@ const NavBar = () => {
               onClick={() => setWindowOpen(!windowOpen)}
             />
             <span>{list.username}</span>
-            {windowOpen ? <RegisterForm /> : ""}
+            {list.userId === 0 ? registerWindow : profileWindow}
           </div>
         </nav>
       </div>

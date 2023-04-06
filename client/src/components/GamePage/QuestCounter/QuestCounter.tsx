@@ -24,7 +24,9 @@ const QuestCounter = () => {
       <h2 className={styles.counter}>
         правильных ответов:{countCurrentAnswers}
       </h2>
-      <button onClick={handleClick}>click</button>
+      <button className={styles.exitBtn} onClick={handleClick}>
+        Выйти в меню
+      </button>
     </div>
   );
 };

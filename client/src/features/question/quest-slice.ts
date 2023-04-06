@@ -51,6 +51,9 @@ const questSlice = createSlice({
     setNewCurrentQuest: (state, action: PayloadAction<quest["id"]>) => {
       state.currentQuest = action.payload;
     },
+    setClearList: (state, action: PayloadAction<quest[]>) => {
+      state.list = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -70,6 +73,7 @@ const questSlice = createSlice({
       });
   },
 });
-export const { setNewTime, setNewCurrentQuest } = questSlice.actions;
+export const { setNewTime, setNewCurrentQuest, setClearList } =
+  questSlice.actions;
 export const questReducer = questSlice.reducer;
 export const selectQuest = (state: RootState) => state.quests;

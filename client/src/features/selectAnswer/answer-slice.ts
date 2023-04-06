@@ -20,9 +20,13 @@ const answerSlice = createSlice({
     setCurrentAnswer(state) {
       state.countCurrentAnswer += 1;
     },
+    setClearCurrentAnswer(state) {
+      state.countCurrentAnswer = 0;
+    },
   },
 });
-export const { setAnswer, setCurrentAnswer } = answerSlice.actions;
+export const { setAnswer, setCurrentAnswer, setClearCurrentAnswer } =
+  answerSlice.actions;
 export const answerReducer = answerSlice.reducer;
 export const selectAnswer = (state: RootState) =>
   state.currentAnswer.selectAnswer;

@@ -23,15 +23,12 @@ type quest = {
 };
 
 export const getQuests = (req: Request, res: Response) => {
-  const cat =
-    req.query.cat === "все"
-      ? "'математика','фильмы','сериалы','история'"
-      : `'${req.query.cat}'`;
+  const cat = req.query.cat === "все" ? "category" : `'${req.query.cat}'`;
   const lim = req.query.lim;
   const diff =
     req.query.diff === "all" ? "'easy','normal','hard'" : `'${req.query.diff}'`;
 
-  const q = `SELECT * FROM questions WHERE category IN (${cat}) AND difficulty IN (${diff})  LIMIT ${lim} `;
+  const q = `SELECT * FROM questions WHERE category IN (${cat}) AND difficulty IN (${diff}) ORDER BY RAND() LIMIT ${lim} `;
   db.query(q, (_, data: quest[]) => {
     return res.json(data);
   });

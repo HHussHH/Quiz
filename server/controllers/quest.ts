@@ -28,7 +28,7 @@ export const getQuests = (req: Request, res: Response) => {
   const diff =
     req.query.diff === "all" ? "'easy','normal','hard'" : `'${req.query.diff}'`;
 
-  const q = `SELECT * FROM questions WHERE category IN (${cat}) AND difficulty IN (${diff}) ORDER BY RAND() LIMIT ${lim} `;
+  const q = `SELECT * FROM quests WHERE category IN (${cat}) AND difficulty IN (${diff}) ORDER BY RAND() LIMIT ${lim} `;
   db.query(q, (_, data: quest[]) => {
     return res.json(data);
   });

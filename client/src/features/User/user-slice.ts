@@ -39,8 +39,7 @@ export const registerUser = createAsyncThunk<
   "@@user/registerUser",
   async ({ login, email, password }, { rejectWithValue }) => {
     try {
-      // eslint-disable-next-line
-      const response = await axios.get<user[]>(
+      await axios.get<user[]>(
         `http://localhost:5000/users/register?username=${login}&email=${email}&password=${password}`
       );
       const responseData = await axios.get<user[]>(

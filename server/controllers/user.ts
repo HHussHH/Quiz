@@ -14,7 +14,7 @@ export const registerUser = (req: Request, res: Response) => {
   const username = req.query.username;
   const email = req.query.email;
   const password = req.query.password;
-  const q = `INSERT INTO Users (username, mail, password, role, coins) 
+  const q = `INSERT INTO users (username, mail, password, role, coins) 
   VALUES ('${username}','${email}','${password}','user','0')`;
 
   db.query(q, (_, data: user[]) => {

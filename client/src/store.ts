@@ -10,6 +10,7 @@ import { finishReducer } from "./features/endGame/finishSlice";
 import { modalWindowReducer } from "./features/modalWindow/modalWindow-slice";
 import { gameSettingReducer } from "./features/gameSettings/setting-slice";
 import { userReducer } from "./features/User/user-slice";
+import { statisticsReducer } from "./features/statistics/statistics-slice";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   modalWindow: modalWindowReducer,
   gameSettings: gameSettingReducer,
   user: userReducer,
+  statistics: statisticsReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

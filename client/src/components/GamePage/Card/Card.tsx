@@ -11,14 +11,18 @@ import {
   selectQuest,
   setNewCurrentQuest,
 } from "../../../features/question/quest-slice";
+import {
+  getStat,
+  selectStatistics,
+  updateStat,
+} from "../../../features/statistics/statistics-slice";
 
 const Card = () => {
   const dispatch = useAppDispatch();
   const answer = useAppSelector(selectAnswer);
   const { list, currentQuest } = useAppSelector(selectQuest);
-  //поиск нужного вопроса
+  const stat = useAppSelector(selectStatistics);
   const quest = list.find((el) => el.id === currentQuest);
-
   const index = list.findIndex((quest) => quest.id === currentQuest);
   const answers = [
     {
@@ -51,7 +55,16 @@ const Card = () => {
         const next = index + 1 === list.length ? index : index + 1;
         dispatch(setAnswer(""));
         dispatch(setNewCurrentQuest(list[next].id));
-        if (list.length === index + 1) dispatch(setFinish(true));
+        if (list.length === index + 1) {
+          dispatch(setFinish(true));
+          dispatch(
+            updateStat({
+              id: stat.list.userId,
+              completed: stat.list.completedQuests + 1,
+              matches: stat.list.matchesPlayed + 1,
+            })
+          );
+        }
       }
     } // eslint-disable-next-line
   }, [quest?.currentTime]);
@@ -62,7 +75,16 @@ const Card = () => {
       const next = index + 1 === list.length ? index : index + 1;
       dispatch(setAnswer(""));
       dispatch(setNewCurrentQuest(list[next].id));
-      if (list.length === index + 1) dispatch(setFinish(true));
+      if (list.length === index + 1) {
+        dispatch(setFinish(true));
+        dispatch(
+          updateStat({
+            id: stat.list.userId,
+            completed: stat.list.completedQuests + 1,
+            matches: stat.list.matchesPlayed + 1,
+          })
+        );
+      }
     }
 
     if (quest?.currentAnswer === answer) {

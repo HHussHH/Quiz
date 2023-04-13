@@ -23,9 +23,9 @@ const NavBar = () => {
           </NavLink>
           <ul>
             <NavLink to="/search-game">Поиск игры</NavLink>
-            <NavLink to="/friends">Друзья</NavLink>
-            <NavLink to="/invetnory">Инвентарь</NavLink>
-            <NavLink to="/market">Маркет</NavLink>
+            <NavLink to="/friends">Рейтинг</NavLink>
+            <NavLink to="/invetnory">Друзья</NavLink>
+            <NavLink to="/market">Обратная связь</NavLink>
           </ul>
           <div className={styles.profile}>
             <ImSearch color="white" size={24} />

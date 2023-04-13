@@ -7,6 +7,7 @@ import { useAppDispatch } from "./store";
 import { setClearList } from "./features/question/quest-slice";
 import { setFinish } from "./features/endGame/finishSlice";
 import { setClearCurrentAnswer } from "./features/selectAnswer/answer-slice";
+import Top from "./pages/Top/Top";
 function App() {
   const location = useLocation();
   const dispatch = useAppDispatch();
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="search-game" element={<SearchGamePage />} />
         <Route path="/game" element={<GamePage />} />
+        <Route path="/top" element={<Top />} />
         <Route path="*" element={<h1>Этой страницы не существует!</h1>} />
       </Routes>
     </div>

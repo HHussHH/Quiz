@@ -11,19 +11,16 @@ import {
   selectQuest,
   setNewCurrentQuest,
 } from "../../../features/question/quest-slice";
-import {
-  getStat,
-  selectStatistics,
-  updateStat,
-} from "../../../features/statistics/statistics-slice";
 
 const Card = () => {
   const dispatch = useAppDispatch();
   const answer = useAppSelector(selectAnswer);
+
   const { list, currentQuest } = useAppSelector(selectQuest);
-  const stat = useAppSelector(selectStatistics);
+
   const quest = list.find((el) => el.id === currentQuest);
   const index = list.findIndex((quest) => quest.id === currentQuest);
+
   const answers = [
     {
       id: "answer_1",
@@ -57,13 +54,6 @@ const Card = () => {
         dispatch(setNewCurrentQuest(list[next].id));
         if (list.length === index + 1) {
           dispatch(setFinish(true));
-          dispatch(
-            updateStat({
-              id: stat.list.userId,
-              completed: stat.list.completedQuests + 1,
-              matches: stat.list.matchesPlayed + 1,
-            })
-          );
         }
       }
     } // eslint-disable-next-line
@@ -75,15 +65,9 @@ const Card = () => {
       const next = index + 1 === list.length ? index : index + 1;
       dispatch(setAnswer(""));
       dispatch(setNewCurrentQuest(list[next].id));
+
       if (list.length === index + 1) {
         dispatch(setFinish(true));
-        dispatch(
-          updateStat({
-            id: stat.list.userId,
-            completed: stat.list.completedQuests + 1,
-            matches: stat.list.matchesPlayed + 1,
-          })
-        );
       }
     }
 

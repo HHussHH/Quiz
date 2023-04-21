@@ -8,6 +8,7 @@ import { setClearList } from "./features/question/quest-slice";
 import { setFinish } from "./features/endGame/finishSlice";
 import { setClearCurrentAnswer } from "./features/selectAnswer/answer-slice";
 import Top from "./pages/Top/Top";
+import HelpPage from "./pages/HelpPages/HelpPage";
 function App() {
   const location = useLocation();
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ function App() {
         <Route path="search-game" element={<SearchGamePage />} />
         <Route path="/game" element={<GamePage />} />
         <Route path="/top" element={<Top />} />
+        <Route path="/help" element={<HelpPage />} />
         <Route path="*" element={<h1>Этой страницы не существует!</h1>} />
       </Routes>
     </div>

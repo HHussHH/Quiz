@@ -31,3 +31,23 @@ export const getUser = (req: Request, res: Response) => {
     return res.json(data);
   });
 };
+
+export const updateUserCoins = (req: Request, res: Response) => {
+  const count = req.query.count;
+  const id = req.query.id;
+  const q = `UPDATE Users SET coins = ${count} WHERE (userId = ${id});`;
+
+  db.query(q, (_, data: user[]) => {
+    return res.json(data);
+  });
+};
+
+export const updateInfo = (req: Request, res: Response) => {
+  const id = req.query.id;
+  const q = `SELECT * FROM Users WHERE userId=${id}`;
+
+  db.query(q, (_, data: user[]) => {
+    return res.json(data);
+  });
+};
+// http://localhost:5000/users/user/update?count=29&id=30

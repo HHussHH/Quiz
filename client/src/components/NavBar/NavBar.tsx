@@ -12,6 +12,9 @@ const NavBar = () => {
   const [windowOpen, setWindowOpen] = useState<boolean>(false);
   const { list } = useAppSelector(selectUser);
 
+  const handleClick = () => {
+    setWindowOpen(!windowOpen);
+  };
   const registerWindow = windowOpen ? <RegisterProfile /> : "";
   const profileWindow = windowOpen ? <Profile /> : "";
   return (
@@ -23,9 +26,8 @@ const NavBar = () => {
           </NavLink>
           <ul>
             <NavLink to="/search-game">Поиск игры</NavLink>
-            <NavLink to="/friends">Рейтинг</NavLink>
-            <NavLink to="/invetnory">Друзья</NavLink>
-            <NavLink to="/market">Обратная связь</NavLink>
+            <NavLink to="/top">Рейтинг</NavLink>
+            <NavLink to="/help">Обратная связь</NavLink>
           </ul>
           <div className={styles.profile}>
             <ImSearch color="white" size={24} />

@@ -27,6 +27,23 @@ export const loadUser = createAsyncThunk<
   }
 });
 
+export const updateDataUser = createAsyncThunk<
+  user[],
+  {
+    id: number;
+  },
+  { rejectValue: string }
+>("@@user/fethUpdateUser", async ({ id }, { rejectWithValue }) => {
+  try {
+    const response = await axios.get<user[]>(
+      `http://localhost:5000/users/user/updateInfo?id=${id}`
+    );
+    return response.data;
+  } catch (err) {
+    return rejectWithValue("Failed to fetch");
+  }
+});
+
 export const registerUser = createAsyncThunk<
   user[],
   {
@@ -84,14 +101,18 @@ const userSlice = createSlice({
     builder.addCase(loadUser.fulfilled, (state, action) => {
       state.status = "received";
       state.error = null;
-      console.log(action.payload);
       state.list = action.payload[0];
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.status = "received";
       state.error = null;
-      console.log(action.payload);
       state.list = action.payload[0];
+    });
+    builder.addCase(updateDataUser.fulfilled, (state, action) => {
+      state.status = "received";
+      state.error = null;
+      state.list = action.payload[0];
+      console.log(state.list);
     });
   },
 });

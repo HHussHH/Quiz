@@ -13,7 +13,6 @@ const StartMenu = () => {
 
   const handleStart = (path: string) => {
     dispatch(setStartStatus(false));
-    console.log(difficulty, category, limit);
     dispatch(loadQuests({ cat: category, lim: limit, diff: difficulty }));
     navigate(`/${path}`);
   };

@@ -35,7 +35,11 @@ const GameFilter = () => {
       <div className={styles.options}>
         <div className={styles.difficulty}>
           <h3 className={styles.title}>Выберите сложность:</h3>
-          <select className={styles.select} onChange={handleChangeDiff}>
+          <select
+            className={styles.select}
+            onChange={handleChangeDiff}
+            defaultValue="all"
+          >
             <option value="all">Все</option>
             <option value="easy">Легкая</option>
             <option value="normal">Нормальная</option>
@@ -45,7 +49,11 @@ const GameFilter = () => {
 
         <div className={styles.theme}>
           <h3 className={styles.title}>Выберите темы:</h3>
-          <select className={styles.select} onChange={handleChangeCat}>
+          <select
+            className={styles.select}
+            onChange={handleChangeCat}
+            defaultValue="все"
+          >
             <option value="все">Все</option>
             <option value="математика">Математика</option>
             <option value="программирование">Программирование</option>
@@ -55,11 +63,13 @@ const GameFilter = () => {
 
         <div className={styles.count}>
           <h3 className={styles.title}>Выберите количество вопросов</h3>
-          <select className={styles.select} onChange={handleChangeLim}>
+          <select
+            className={styles.select}
+            onChange={handleChangeLim}
+            defaultValue="10"
+          >
             <option value="5">5</option>
-            <option value="10" selected>
-              10
-            </option>
+            <option value="10">10</option>
             <option value="20">20</option>
           </select>
         </div>

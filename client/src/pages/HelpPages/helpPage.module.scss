@@ -1,0 +1,28 @@
+.helpPage {
+  min-height: 90vh;
+  border-radius: 20px;
+  border: 1px solid #000;
+  &_title {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 800;
+    font-size: 64px;
+  }
+
+  &_text {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  &_link {
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    color: rgb(0, 169, 254);
+    font-weight: 700;
+    font-size: 32px;
+    margin-top: 100px;
+  }
+}

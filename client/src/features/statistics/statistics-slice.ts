@@ -25,10 +25,9 @@ export const updateStat = createAsyncThunk<
   },
   { rejectValue: string }
 >(
-  "@@statistics/fetchStat",
+  "@@statistics/fetchStatUpdate",
   async ({ id, completed, matches }, { rejectWithValue }) => {
     try {
-      console.log(id);
       await axios.get<void>(
         `http://localhost:5000/statistics/updateStat?userId=${id}&completed=${completed}&matches=${matches}`
       );
@@ -44,7 +43,7 @@ export const getStat = createAsyncThunk<
     id: user["userId"];
   },
   { rejectValue: string }
->("@@statistics/fetchStat", async ({ id }, { rejectWithValue }) => {
+>("@@statistics/fetchStatGet", async ({ id }, { rejectWithValue }) => {
   try {
     if (id != 0) {
       const respone = await axios.get<stats[]>(
@@ -88,6 +87,7 @@ const statisticsSlice = createSlice({
       })
       .addCase(getStat.fulfilled, (state, action) => {
         state.status = "received";
+        console.log(action.payload);
         const { userId, statId, completedQuests, matchesPlayed } =
           action.payload[0];
         state.list = {

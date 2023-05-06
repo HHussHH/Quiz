@@ -22,7 +22,7 @@
 .intro {
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 20px;
   gap: 5px;
   align-items: center;
 }
@@ -54,4 +54,59 @@
   border: none;
   font-size: 18px;
   border-radius: 10px;
+}
+
+@media (max-width: 870px) {
+  .panel {
+    width: 600px;
+
+    top: 50%;
+  }
+
+  .title {
+    font-size: 46px;
+  }
+
+  .btn {
+    margin-top: 25px;
+  }
+}
+
+@media (max-width: 720px) {
+  .panel {
+    width: 500px;
+    top: 55%;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+  .text {
+    font-size: 16px;
+  }
+
+  .btn {
+    margin-top: 25px;
+  }
+}
+
+@media (max-width: 510px) {
+  .panel {
+    width: 320px;
+
+    top: 60%;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 26px;
+  }
+  .text {
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .btn {
+    margin-top: 25px;
+  }
 }

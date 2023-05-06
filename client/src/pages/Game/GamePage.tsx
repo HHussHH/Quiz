@@ -15,7 +15,6 @@ const GamePage = () => {
         <>
           <Timer />
           <Card />
-          <CardPanel />
         </>
       )}
     </div>

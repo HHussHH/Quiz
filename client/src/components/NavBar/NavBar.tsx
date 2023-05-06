@@ -1,5 +1,5 @@
 import styles from "./NavBar.module.scss";
-import { ImSearch } from "react-icons/im";
+
 import { CgProfile } from "react-icons/cg";
 import { ReactComponent as LogoIcon } from "../../img/logo.svg";
 import { NavLink } from "react-router-dom";
@@ -17,6 +17,7 @@ const NavBar = () => {
   };
   const registerWindow = windowOpen ? <RegisterProfile /> : "";
   const profileWindow = windowOpen ? <Profile /> : "";
+
   return (
     <div className={styles.nav}>
       <div className="container">
@@ -30,16 +31,11 @@ const NavBar = () => {
             <NavLink to="/help">Обратная связь</NavLink>
           </ul>
           <div className={styles.profile}>
-            <ImSearch color="white" size={24} />
-            <CgProfile
-              color="white"
-              size={28}
-              onClick={() => setWindowOpen(!windowOpen)}
-            />
+            <CgProfile color="white" size={28} onClick={handleClick} />
             <span>{list.username}</span>
-            {list.userId === 0 ? registerWindow : profileWindow}
           </div>
         </nav>
+        {list.userId === 0 ? registerWindow : profileWindow}
       </div>
     </div>
   );

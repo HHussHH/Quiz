@@ -11,12 +11,6 @@ const Footer = () => {
           <a className={styles.link} href="#">
             Правил игры.
           </a>
-          <a className={styles.link} href="#">
-            Правила сайта.
-          </a>
-          <a className={styles.link} href="#">
-            Гайд для новичков.
-          </a>
         </div>
       </div>
       <div className={styles.col}>

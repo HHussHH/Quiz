@@ -7,8 +7,11 @@ import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
-);
+); //инициализируем проект
 root.render(
+  //подключем редакс
+  //Подключем персист
+  //Подключем роутер
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>

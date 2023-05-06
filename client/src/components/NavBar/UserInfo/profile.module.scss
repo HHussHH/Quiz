@@ -1,0 +1,33 @@
+.profile {
+  margin: 0 auto;
+  margin-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  text-align: center;
+  &_name {
+    span {
+      color: #02ff2c;
+    }
+  }
+  &_role {
+    span {
+      color: #00ffff;
+    }
+  }
+  &_coins {
+    span {
+      color: #e8f000;
+    }
+  }
+  &_btn {
+    display: block;
+    margin: 5px auto;
+    padding: 5px 25px;
+    border: 0px;
+    font-weight: 700;
+    font-size: 16px;
+    width: max-content;
+  }
+}

@@ -11,16 +11,23 @@ import {
   selectQuest,
   setNewCurrentQuest,
 } from "../../../features/question/quest-slice";
+import { useNavigate } from "react-router-dom";
+import { useCounter } from "../QuestCounter/useCounter";
 
 const Card = () => {
+  const [countQuestions] = useCounter();
+
+  const navigate = useNavigate();
+  //получение данных из store
   const dispatch = useAppDispatch();
   const answer = useAppSelector(selectAnswer);
 
   const { list, currentQuest } = useAppSelector(selectQuest);
-
+  // поиск конкретных данных
   const quest = list.find((el) => el.id === currentQuest);
   const index = list.findIndex((quest) => quest.id === currentQuest);
-
+  const position = index + 1;
+  // типизация ответов
   const answers = [
     {
       id: "answer_1",
@@ -83,9 +90,15 @@ const Card = () => {
   return (
     <div className={styles.card}>
       {list.length === 0 ? (
-        "loading..."
+        "загрузка..."
       ) : (
         <div className={styles.bg}>
+          <p className={styles.quest_info}>
+            Всего вопросов:<span>{countQuestions}</span>
+          </p>
+          <p className={styles.quest_current}>
+            Вы находитесь на <span>{position}</span> вопросе
+          </p>
           <h1 className={styles.title}>{quest?.title}</h1>
           <p className={styles.text}>{quest?.text}</p>
           <div className={styles.difficult}>
@@ -107,6 +120,9 @@ const Card = () => {
           <div className={styles.optionalBtn}>
             <button className={styles.btn} onClick={answerBtn}>
               Ответить
+            </button>
+            <button className={styles.btn_red} onClick={() => navigate("/")}>
+              Сдаться
             </button>
           </div>
         </div>

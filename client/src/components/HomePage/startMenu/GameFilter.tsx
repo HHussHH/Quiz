@@ -62,7 +62,7 @@ const GameFilter = () => {
         </div>
 
         <div className={styles.count}>
-          <h3 className={styles.title}>Выберите количество вопросов</h3>
+          <h3 className={styles.title}>Выберите кол-во вопросов</h3>
           <select
             className={styles.select}
             onChange={handleChangeLim}

@@ -17,12 +17,20 @@ const Profile = () => {
     dispatch(ExitIntoAccount(setGuestAccount));
   };
   return (
-    <div className={styles.profle}>
-      <h2>Имя:{list.username}</h2>
-      <h3>Почта:{list.mail}</h3>
-      <h3>Роль:{list.role}</h3>
-      <h3>Монет:{list.coins}</h3>
-      <button onClick={handleExit}>Выйти</button>
+    <div className={styles.profile}>
+      <h2 className={styles.profile_name}>
+        Имя:<span>{list.username}</span>
+      </h2>
+      <h3 className={styles.profile_mail}>Почта:{list.mail}</h3>
+      <h3 className={styles.profile_role}>
+        Роль:<span>{list.role}</span>
+      </h3>
+      <h3 className={styles.profile_coins}>
+        Монет:<span>{list.coins}</span>
+      </h3>
+      <button className={styles.profile_btn} onClick={handleExit}>
+        Выйти
+      </button>
     </div>
   );
 };

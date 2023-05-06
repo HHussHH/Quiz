@@ -5,6 +5,7 @@ import styles from "./top.module.scss";
 import { getTopCompleted, getTopPlayed } from "./selectTopInfo";
 
 const Top = () => {
+  //пишем типы данных кастомные, для TypeScript
   interface ItopCompleted {
     username: string;
     completedQuests: number;
@@ -14,9 +15,11 @@ const Top = () => {
     matchesPlayed: number;
   }
 
+  // указываем какого типа данные мы будем хранить в состоянии
   const [topCompleted, setCompletedTop] = useState<ItopCompleted[]>([]);
   const [topPlayed, setTopPlayed] = useState<ItopPlayed[]>([]);
 
+  // выгружаем топ при создании компонента
   useEffect(() => {
     getTopCompleted().then((res) => {
       setCompletedTop(res);
@@ -26,6 +29,7 @@ const Top = () => {
     });
   }, []);
 
+  // код отображения топов
   const showTopCompleted = topCompleted.map((item, idx) => (
     <ul key={idx}>
       <span>{idx + 1}.</span>

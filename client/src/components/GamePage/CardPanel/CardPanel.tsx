@@ -3,11 +3,10 @@ import { useCounter } from "../QuestCounter/useCounter";
 import styles from "./CardPanel.module.scss";
 import { selectQuest } from "../../../features/question/quest-slice";
 import { useAppSelector } from "../../../store";
-type panelType = {
-  questPosition: number;
-};
+
 const CardPanel = () => {
   const navigate = useNavigate();
+  //сетчик вопрсов
   const [countQuestions] = useCounter();
 
   const { list, currentQuest } = useAppSelector(selectQuest);
@@ -28,7 +27,7 @@ const CardPanel = () => {
         </p>
 
         <div className={styles.btns}>
-          <button onClick={() => navigate("/")}>Сдаться</button>
+          <button>Сдаться</button>
           <button>Пожаловаться</button>
         </div>
       </div>

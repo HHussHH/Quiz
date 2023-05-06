@@ -22,27 +22,29 @@ const CardGroup = () => {
   const coins = userInfo.list.coins;
   const matchesPlayed = statisticsInfo.list.matchesPlayed;
   const completedQuests = statisticsInfo.list.completedQuests;
+
+  //отправляем данные на сервер
   const handleChangeCat = (
     e: React.ChangeEvent<HTMLSelectElement & { value: categoriec }>
   ) => {
     dispatch(setCat(e.target.value));
   };
-
+  //отправляем данные на сервер
   const handleChangeDiff = (
     e: React.ChangeEvent<HTMLSelectElement & { value: difficulty }>
   ) => {
     dispatch(setDiff(e.currentTarget.value));
   };
-
+  //отправляем данные на сервер
   const handleChangeLim = (
     e: React.ChangeEvent<HTMLSelectElement & { value: limit }>
   ) => {
     dispatch(setCount(e.target.value));
     // console.log(e.target.value);
   };
-
+  //отправляем данные в redux
   const { difficulty, category, limit } = useAppSelector(selectSettings);
-
+  //отправляем данные d redux для старта игры
   const handleStart = (path: string) => {
     dispatch(setStartStatus(false));
     dispatch(loadQuests({ cat: category, lim: limit, diff: difficulty }));

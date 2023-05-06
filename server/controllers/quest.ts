@@ -1,11 +1,6 @@
 import { db } from "../db";
 export type difficult = "easy" | "normal" | "hard" | "all";
-export type categoriec =
-  | "фильмы"
-  | "сериалы"
-  | "история"
-  | "математика"
-  | "все";
+export type categoriec = "фильмы" | "программирование" | "математика" | "все";
 import { Request, Response } from "express";
 
 type quest = {

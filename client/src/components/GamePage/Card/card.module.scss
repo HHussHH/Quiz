@@ -101,6 +101,72 @@
   font-size: 24px;
 }
 
+.btn_red {
+  cursor: pointer;
+
+  width: 150px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  margin: 10px auto;
+  background-color: #fa0b0b;
+  font-family: "Ubuntu Condensed", sans-serif;
+  color: #fff;
+  font-size: 24px;
+}
+
 .active {
   border-color: #000;
+}
+
+.quest_info {
+  padding-top: 10px;
+  width: max-content;
+  display: block;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0 auto;
+  span {
+    color: rgb(12, 30, 233);
+  }
+}
+.quest_current {
+  padding-top: 10px;
+  width: max-content;
+  display: block;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0 auto;
+  span {
+    color: rgb(1, 238, 255);
+  }
+}
+
+@media (max-width: 550px) {
+  .card {
+    width: 320px;
+  }
+  .variant {
+    width: 280px;
+    font-size: 18px;
+  }
+  .active {
+    border-color: #000;
+  }
+  .title {
+    font-size: 20px;
+  }
+
+  .text {
+    font-size: 18px;
+  }
+  .difficult {
+    font-size: 16px;
+  }
+  .quest_info {
+    font-size: 18px;
+  }
+  .quest_current {
+    font-size: 18px;
+  }
 }

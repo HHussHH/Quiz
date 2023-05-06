@@ -16,3 +16,21 @@
   margin: 0 auto;
   cursor: pointer;
 }
+
+@media (max-width: 600px) {
+  .counter {
+    font-size: 34px;
+    margin-bottom: 60px;
+  }
+
+  .exitBtn {
+    display: block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+}

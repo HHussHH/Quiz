@@ -27,20 +27,25 @@ const QuestCounter = () => {
   };
 
   const handleClick = () => {
-    dispatch(
-      updateStat({
-        id: stat.list.userId,
-        completed: stat.list.completedQuests + countCurrentAnswers,
-        matches: stat.list.matchesPlayed + 1,
-      })
-    );
-    dispatch(getStat({ id: stat.list.userId }));
-    updateCoins(stat.list.userId, countCurrentAnswers + user.list.coins);
-    dispatch(setClearList([]));
-    dispatch(setFinish(false));
-    dispatch(setClearCurrentAnswer());
-    navigate("/");
-    dispatch(updateDataUser({ id: stat.list.userId }));
+    if (stat.list.userId === 0) {
+      console.log("Пойман");
+      navigate("/");
+    } else {
+      dispatch(
+        updateStat({
+          id: stat.list.userId,
+          completed: stat.list.completedQuests + countCurrentAnswers,
+          matches: stat.list.matchesPlayed + 1,
+        })
+      );
+      dispatch(getStat({ id: stat.list.userId }));
+      updateCoins(stat.list.userId, countCurrentAnswers + user.list.coins);
+      dispatch(updateDataUser({ id: stat.list.userId }));
+      dispatch(setClearList([]));
+      dispatch(setFinish(false));
+      dispatch(setClearCurrentAnswer());
+      navigate("/");
+    }
   };
   return (
     <div>

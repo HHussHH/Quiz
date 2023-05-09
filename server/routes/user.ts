@@ -1,3 +1,4 @@
+//Подключение зависимостей(фреймворков, методов и тп) для опр адреса
 import express from "express";
 import {
   getUser,
@@ -7,11 +8,11 @@ import {
 } from "../controllers/user";
 
 const router = express.Router();
+//Выдача данных c с сервера пользователю 
+router.get("/user", getUser); //вход
+router.get("/user/update", updateUserCoins); //Начисление монеток
+router.get("/user/updateInfo", updateInfo); //Обновление данных
 
-router.get("/user", getUser);
-router.get("/user/update", updateUserCoins);
-router.get("/user/updateInfo", updateInfo);
-
-router.get("/register", registerUser);
+router.get("/register", registerUser); //регистрация
 
 export default router;

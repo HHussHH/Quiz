@@ -1,3 +1,4 @@
+//Подключение зависимостей(фреймворков, методов и тп) для опр адреса
 import express from "express";
 import {
   getStatistics,
@@ -7,8 +8,8 @@ import {
 } from "../controllers/statistics";
 
 const router = express.Router();
-
-router.get("/updateStat", setStatistics);
+//Выдача данных c с сервера статистике
+router.get("/updateStat", setStatistics); //
 router.get("/getStat", getStatistics);
 router.get("/getStat/topCompleted", getTopCompletedQuests);
 router.get("/getStat/topPlayed", getTopPlayed);

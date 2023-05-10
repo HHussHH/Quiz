@@ -1,7 +1,7 @@
-import { db } from "../db";
+import { db } from "../db";//Импорт обращения к БД
 
 import { Request, Response } from "express";
-
+//Создаем метод для обновления данных по id пользователя
 export const setStatistics = (req: Request, res: Response) => {
   const userId = req.query.userId;
   const completedQuests = req.query.completed;
@@ -12,7 +12,7 @@ export const setStatistics = (req: Request, res: Response) => {
     return res.json(data);
   });
 };
-
+//Создание метода для получения данных пользователя
 export const getStatistics = (req: Request, res: Response) => {
   const userId = req.query.userId;
   const q = `SELECT * FROM statistics WHERE userId = ${userId}`;
@@ -21,7 +21,7 @@ export const getStatistics = (req: Request, res: Response) => {
     return res.json(data);
   });
 };
-
+//Создание метода для получения статистики (топ 5 игроков по выполненным вопросам)
 export const getTopCompletedQuests = (req: Request, res: Response) => {
   const q = `
     SELECT u.username, s.completedQuests
@@ -32,7 +32,7 @@ export const getTopCompletedQuests = (req: Request, res: Response) => {
     return res.json(data);
   });
 };
-
+//Создание метода для получения статистики (топ 5 игроков по количеству игр)
 export const getTopPlayed = (req: Request, res: Response) => {
   const q = `
     SELECT u.username, s.matchesPlayed
@@ -44,4 +44,4 @@ export const getTopPlayed = (req: Request, res: Response) => {
   });
 };
 
-//http://localhost:5000/statistics/updateStat?userId=20&completed=2&matches=2
+// Пример - http://localhost:5000/statistics/updateStat?userId=20&completed=2&matches=2

@@ -1,7 +1,8 @@
-import { db } from "../db";
+import { db } from "../db";//Импорт обращения к БД
+//Создали типы объектов
 import { Request, Response } from "express";
 type role = "user" | "vip" | "admin";
-
+//Создали типы объектов
 type user = {
   userId: number;
   username: string;
@@ -10,6 +11,7 @@ type user = {
   role: role;
   coins: number;
 };
+//Создаем метод для регистрации пользователя
 export const registerUser = (req: Request, res: Response) => {
   const username = req.query.username;
   const email = req.query.email;
@@ -21,7 +23,7 @@ export const registerUser = (req: Request, res: Response) => {
     return res.json(data);
   });
 };
-
+//Создаем метод для авторизации
 export const getUser = (req: Request, res: Response) => {
   const username = req.query.username;
   const password = req.query.password;
@@ -31,7 +33,7 @@ export const getUser = (req: Request, res: Response) => {
     return res.json(data);
   });
 };
-
+//Создаем метод для обновления кол-ва монет у пользователя
 export const updateUserCoins = (req: Request, res: Response) => {
   const count = req.query.count;
   const id = req.query.id;
@@ -41,7 +43,7 @@ export const updateUserCoins = (req: Request, res: Response) => {
     return res.json(data);
   });
 };
-
+//Создаем метод для обновления доп информации о пользвоателе
 export const updateInfo = (req: Request, res: Response) => {
   const id = req.query.id;
   const q = `SELECT * FROM Users WHERE userId=${id}`;
